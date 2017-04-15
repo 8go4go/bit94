@@ -3,7 +3,7 @@ package kr.co.heartof.board;
 import java.util.Scanner;
 
 /**
- * 이 프로젝트는 테스트용으로 github와 연동한다. 
+ * 이 프로젝트는 테스트용으로 github와 연동한다. (좀 올라가 주세요)
  * @author kai
  *
  */
