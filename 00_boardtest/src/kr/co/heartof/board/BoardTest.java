@@ -1,6 +1,12 @@
+
 package kr.co.heartof.board;
 import java.util.Scanner;
 
+/**
+ * 이 프로젝트는 테스트용으로 github와 연동한다. 
+ * @author kai
+ *
+ */
 public class BoardTest {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
