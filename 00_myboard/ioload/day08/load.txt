@@ -1,0 +1,5 @@
+1	안녕하세요	이상욱	I tried making a new temp.txt file and writing the new contents into that, deleting this text file and renaming temp.txt to this one. Thing is, the deletion is always unsuccessful. I don't think I have to change user permissions for this do I?
+2	반갑습니다.	김을진	My biggest "D'oh" moment! I've been compiling it on Eclipse rather than cmd which was where I was executing it. So my newly compiled classes went to the bin folder and the compiled class file via command prompt remained the same in my src folder. I recompiled with my new code and it works like a charm.
+3	반바반가	ㅂ잇이이상욱	ㅇ간가가나다라마바사
+4	안아안녕	ㅇ반바반가	ㅂㄻㄹㅇㅁㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄹㄴㅇㅁㄹ
+5	adfasdfasdfadsf	sdfgdsfgsdfg	gdhgfhfgdhdfgh

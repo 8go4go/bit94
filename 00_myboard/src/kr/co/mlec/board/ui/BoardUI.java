@@ -1,6 +1,6 @@
 package kr.co.mlec.board.ui;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 import kr.co.mlec.board.dao.BoardDAO;
@@ -18,7 +18,7 @@ public class BoardUI {
 	public BoardUI() {
 		try {
 			dao = new BoardDAO("ioload/day08/load.txt", 5);
-		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 			System.out.println(showError(BoardErrorType.INIT_LOAD_ERR));
 		}
 		keyInput = new Scanner(System.in);
@@ -70,6 +70,10 @@ public class BoardUI {
 	private void stopApplication() {
 		showResult("프로그램을 종료합니다.");
 		keyInput.close();
+		try {
+			dao.close();
+		} catch (IOException e) {
+		}
 		System.exit(0);
 	}
 
@@ -110,7 +114,7 @@ public class BoardUI {
 		showResult("내용을 입력하세요 : ");
 		insertData.setContent(getData());
 
-		boolean isResult = dao.insert(insertData);
+		boolean isResult = dao.insertWithFile(insertData);
 
 		String result = isResult ? "글등록이 완료 되었습니다." : "글등록이 실패하였습니다.";
 		showResult(result);
