@@ -1,5 +1,7 @@
 package kr.co.mlec.board.dao;
 
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 import java.util.Vector;
 
 import kr.co.mlec.board.vo.BoardVO;
@@ -7,13 +9,38 @@ import kr.co.mlec.board.vo.BoardVO;
 public class BoardDAO {
 	private BoardVO[] datas = null;
 	public static final int DEFAULT_SIZE = 5;
-	public BoardDAO() {
+	public BoardDAO() throws FileNotFoundException {
 		this(DEFAULT_SIZE);
 	}
 	
-	public BoardDAO(int size) {
-		datas = new BoardVO[size];
+	public BoardDAO(int size) throws FileNotFoundException {
+		this(null, size);
 	}
+	
+	public BoardDAO(String path, int size) throws FileNotFoundException {
+		datas = new BoardVO[size];
+		loadData(path);
+	}
+	
+	private void loadData(String path) throws FileNotFoundException {
+		if(path != null) {
+			Scanner sc = new Scanner(new java.io.File(path));
+			Vector<BoardVO> vec = new Vector<BoardVO>();
+			while(sc.hasNextLine()) {
+				BoardVO vo = new BoardVO();
+				String[] load = sc.nextLine().split("\t");
+				vo.setNo(Integer.parseInt(load[0]));
+				vo.setTitle(load[1]);
+				vo.setWriter(load[2]);
+				vo.setContent(load[3]);
+				vec.add(vo);
+			}
+			datas = new BoardVO[vec.size()];
+			datas = vec.toArray(datas);
+			sc.close();
+		}
+	}
+	
 	public BoardVO[] selectList() {
 		Vector<BoardVO> list = new Vector<BoardVO>();
 		

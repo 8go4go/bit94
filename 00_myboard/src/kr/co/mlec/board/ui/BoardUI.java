@@ -1,5 +1,6 @@
 package kr.co.mlec.board.ui;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import kr.co.mlec.board.dao.BoardDAO;
@@ -15,14 +16,18 @@ public class BoardUI {
 	private Scanner keyInput;
 
 	public BoardUI() {
-		dao = new BoardDAO();
+		try {
+			dao = new BoardDAO("ioload/day08/load.txt", 5);
+		} catch (FileNotFoundException e) {
+			System.out.println(showError(BoardErrorType.INIT_LOAD_ERR));
+		}
 		keyInput = new Scanner(System.in);
 	}
 
 	public void service() {
 		run();
 	}
-
+	
 	public void run() {
 		BoardMenuConstant menu = null;
 		Scanner keyInput = new Scanner(System.in);
@@ -59,6 +64,7 @@ public class BoardUI {
 				break;
 			}
 		}
+		keyInput.close();
 	}
 
 	private void stopApplication() {
@@ -184,6 +190,8 @@ public class BoardUI {
 		case NO_DATA:
 			return error.getMsg();
 		case MENU_WRONG:
+			return error.getMsg();
+		case INIT_LOAD_ERR :
 			return error.getMsg();
 		default:
 			return null;
