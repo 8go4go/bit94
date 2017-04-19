@@ -70,10 +70,6 @@ public class BoardUI {
 	private void stopApplication() {
 		showResult("프로그램을 종료합니다.");
 		keyInput.close();
-		try {
-			dao.close();
-		} catch (IOException e) {
-		}
 		System.exit(0);
 	}
 

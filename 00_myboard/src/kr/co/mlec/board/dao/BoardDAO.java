@@ -11,11 +11,10 @@ import java.util.Vector;
 import kr.co.mlec.board.vo.BoardVO;
 
 public class BoardDAO {
-	private BufferedWriter fw = null;
-	private BufferedReader fr = null;
-	
 	private BoardVO[] datas = null;
+	private String path = null;
 	public static final int DEFAULT_SIZE = 5;
+	
 	public BoardDAO() throws IOException {
 		this(DEFAULT_SIZE);
 	}
@@ -26,13 +25,14 @@ public class BoardDAO {
 	
 	public BoardDAO(String path, int size) throws IOException {
 		datas = new BoardVO[size];
-		fw = new BufferedWriter(new FileWriter(new File(path), true));
-		fr = new BufferedReader(new FileReader(new File(path)));
-		loadData(path);
+		this.path = path;
+		loadData();
 	}
 	
-	private void loadData(String path) throws IOException {
+	private void loadData() throws IOException {
 		if(path != null) {
+			BufferedReader fr = new BufferedReader(new FileReader(new File(path)));
+			
 			Vector<BoardVO> vec = new Vector<BoardVO>();
 			String readData = null;
 			while((readData = fr.readLine()) != null) {
@@ -46,6 +46,8 @@ public class BoardDAO {
 			}
 			datas = new BoardVO[vec.size()];
 			datas = vec.toArray(datas);
+			
+			fr.close();
 		}
 	}
 	
@@ -93,6 +95,7 @@ public class BoardDAO {
 	
 	public boolean insertWithFile(BoardVO insertData) {
 		try {
+			BufferedWriter fw = new BufferedWriter(new FileWriter(new File(path), true));
 			Vector<BoardVO> list = new Vector<BoardVO>();
 			for(BoardVO vo : datas) {
 				if(vo != null)
@@ -111,16 +114,13 @@ public class BoardDAO {
 			sb.append(insertData.getContent());
 			fw.write(sb.toString());
 			fw.flush();
-			
+			fw.close();
 			return true;
 		} catch(Exception e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
 	}
-	
-	
-	
 	
 	public boolean delete(int num) {
 		try {
@@ -133,6 +133,8 @@ public class BoardDAO {
 			}
 			
 			datas = list.toArray(new BoardVO[list.size()]);
+			
+			dataReWrite(datas);
 			return true;
 		} catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -145,6 +147,7 @@ public class BoardDAO {
 			datas[num - 1].setContent(updateData.getContent());
 			datas[num - 1].setTitle(updateData.getTitle());
 			
+			dataReWrite(datas);
 			return true;
 		} catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -162,19 +165,20 @@ public class BoardDAO {
 		
 		return list.size() > 0 ? datas : null;
 	}
-
-	public void close() throws IOException {
-		fw.close();
-		fr.close();
-	}
 	
-	public static void main(String[] args) throws IOException {
-		BoardDAO bd = new BoardDAO("ioload/day08/load.txt", 5);
-		BoardVO v = new BoardVO();
-		v.setNo(1);
-		v.setTitle("adfsadfasdf");
-		v.setWriter("asdfasdfasdf");
-		v.setContent("asdfasdfsadf");
-		bd.insertWithFile(v);
+	private void dataReWrite(BoardVO[] datas) throws IOException {
+		BufferedWriter fw = new BufferedWriter(new FileWriter(new File(path), false));
+		StringBuffer sb = new StringBuffer();
+		
+		for(int i=0; i < datas.length; i++) {
+			BoardVO insertData = datas[i];
+			sb.append(insertData.getNo()).append("\t");
+			sb.append(insertData.getTitle()).append("\t");
+			sb.append(insertData.getWriter()).append("\t");
+			sb.append(insertData.getContent());
+		}
+		fw.flush();
+		fw.write(sb.toString());
+		fw.close();
 	}
 }
