@@ -25,7 +25,6 @@ public class Quiz03 {
 		return splites; 
 	}
 	
-	
 	public static void main(String[] args) {
 		Quiz03 q = new Quiz03();
 		String[] result = q.split("33:홍길동:서울:a@a.com", ":");
