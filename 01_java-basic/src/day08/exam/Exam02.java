@@ -2,20 +2,20 @@ package day08.exam;
 
 public class Exam02 {
 	public static void main(String[] args) {
-		System.out.println(getNextId("USER-00007"));
+		System.out.println(getNextId("USER-00001"));
 		System.out.println(getNextId("ORDER-00009"));
-		System.out.println(getNextId("PRODUCT-00003"));
+		System.out.println(getNextId("ORDER-00099"));
+		System.out.println(getNextId("PRODUCT-00999"));
+		System.out.println(getNextId("PRODUCT-09999"));
 	}
 	
 	private static String getNextId(String id) {
-		String increment = id.replaceAll("[1-9]", "");
+		String increment = id.replaceAll("[0-9]", "");
 		String others = id.replaceAll("[A-Z0\\-]", "");
 		int incrementValue = Integer.parseInt(others) + 1;
 		
-		if(incrementValue > 9) {
-			increment = increment.substring(0, increment.length() - 1);
-		}
+		increment = String.valueOf(increment) + Exam03.leftPad(String.valueOf(incrementValue), 5, '0');
 		
-		return String.valueOf(increment + incrementValue);
+		return increment;
 	}
 }

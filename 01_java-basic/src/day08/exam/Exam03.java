@@ -12,11 +12,11 @@ public class Exam03 {
 		String padStr = "";
 		if(value.length() < pad) {
 			int mod = pad - value.length();
-			for(int i=0; i <= mod; i++) {
+			for(int i=0; i < mod; i++) {
 				padStr = padStr + c; 
 			}
 		} else if(value.length() == pad){
-			padStr = null;
+			padStr = "";
 		} else {
 			value = value.substring(0, pad);
 		}
