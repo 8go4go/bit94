@@ -86,7 +86,7 @@ public class MultipartRequest {
 		sb.append(OPEN).append("Content").append(CLOSE).append("\n");
 		for(String key : keys) {
 			sb.append("\t").append(OPEN).append(key).append(CLOSE).append("\n");
-			sb.append("\t").append(params.get(key)).append("\n");
+			sb.append("\t").append("\t").append(params.get(key).trim()).append("\n");
 			sb.append("\t").append(OPEN).append(key).append(FINAL).append(CLOSE).append("\n");
 		}
 		sb.append(OPEN).append("Content").append(FINAL).append(CLOSE).append("\n");
