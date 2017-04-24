@@ -10,7 +10,7 @@ import java.util.Vector;
 
 import kr.co.mlec.board.vo.BoardVO;
 
-public class BoardDAO {
+public class BoardDAO implements BoardDAOable{
 	private BoardVO[] datas = null;
 	private String path = null;
 	public static final int DEFAULT_SIZE = 5;
@@ -29,7 +29,7 @@ public class BoardDAO {
 		loadData();
 	}
 	
-	private void loadData() throws IOException {
+	public void loadData() throws IOException {
 		if(path != null) {
 			BufferedReader fr = new BufferedReader(new FileReader(new File(path)));
 			
@@ -48,7 +48,7 @@ public class BoardDAO {
 			datas = vec.toArray(datas);
 			
 			fr.close();
-		}
+		} 
 	}
 	
 	public BoardVO[] selectList() {

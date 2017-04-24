@@ -3,7 +3,8 @@ package kr.co.mlec.board.ui;
 import java.io.IOException;
 import java.util.Scanner;
 
-import kr.co.mlec.board.dao.BoardDAO;
+import kr.co.mlec.board.dao.BoardDAOable;
+import kr.co.mlec.board.dao.BoardDAOwithMybatis;
 import kr.co.mlec.board.vo.BoardErrorType;
 import kr.co.mlec.board.vo.BoardMenuConstant;
 import kr.co.mlec.board.vo.BoardVO;
@@ -11,13 +12,14 @@ import kr.co.mlec.board.vo.BoardVO;
 public class BoardUI {
 	private boolean isRunning = false;
 
-	private BoardDAO dao;
+	private BoardDAOable dao;
 
 	private Scanner keyInput;
 
 	public BoardUI() {
 		try {
-			dao = new BoardDAO("ioload/day08/load.txt", 5);
+//			dao = new BoardDAO("ioload/day08/load.txt", 5);
+			dao = new BoardDAOwithMybatis("kr/co/mlec/board/mybatis/mybatis_config.xml");
 		} catch (IOException e) {
 			System.out.println(showError(BoardErrorType.INIT_LOAD_ERR));
 		}
@@ -77,7 +79,7 @@ public class BoardUI {
 		showResult("---------------------------");
 		showResult("번호\t제목\t글쓴이");
 		showResult("---------------------------");
-		BoardVO[] datas = dao.getDatas();
+		BoardVO[] datas = dao.selectList();
 
 		if (datas != null) {
 			for (int i = datas.length - 1; i >= 0; i--) {
@@ -110,7 +112,7 @@ public class BoardUI {
 		showResult("내용을 입력하세요 : ");
 		insertData.setContent(getData());
 
-		boolean isResult = dao.insertWithFile(insertData);
+		boolean isResult = dao.insert(insertData);
 
 		String result = isResult ? "글등록이 완료 되었습니다." : "글등록이 실패하였습니다.";
 		showResult(result);
@@ -126,7 +128,8 @@ public class BoardUI {
 		updateData.setTitle(getData());
 		showResult("변경할 내용을 입력하세요 : ");
 		updateData.setContent(getData());
-
+		
+		updateData.setNo(no);
 		boolean isResult = dao.update(no, updateData);
 
 		String result = isResult ? "글수정이 완료 되었습니다." : "글수정이 실패하였습니다.";
@@ -162,7 +165,12 @@ public class BoardUI {
 	}
 
 	private int getDataInt() {
-		int iNum = Integer.parseInt(keyInput.nextLine());
+		int iNum = -1;
+		try {
+		iNum = Integer.parseInt(keyInput.nextLine());
+		} catch(Exception e) {
+			System.err.println(showError(BoardErrorType.NO_DATA));
+		}
 		return iNum;
 	}
 

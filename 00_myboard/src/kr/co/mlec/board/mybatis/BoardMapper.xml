@@ -2,6 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.mlec.board.mybatis.BoardMapper">
 	<select id="selectList" resultType="kr.co.mlec.board.vo.BoardVO">
-		select * from bitBoard
+		select * from board
 	</select>
+
+
+	<select id="selectDetail" resultType="kr.co.mlec.board.vo.BoardVO" parameterType="int">
+		select * from board where no = #{no}
+	</select>
+
+	<insert id="insertBoard" parameterType="kr.co.mlec.board.vo.BoardVO" >
+		insert into board (title, writer, content) values 
+		(#{title}, #{writer}, #{content})
+	</insert>
+	
+	<update id="updateBoard" parameterType="kr.co.mlec.board.vo.BoardVO">
+		update board set 
+			title = #{title}, 
+			content = #{content}
+		where no = #{no}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="int">
+		delete from board where no = #{no};
+	</delete>
+	
 </mapper>

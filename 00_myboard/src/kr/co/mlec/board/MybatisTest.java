@@ -1,7 +1,6 @@
 package kr.co.mlec.board;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
