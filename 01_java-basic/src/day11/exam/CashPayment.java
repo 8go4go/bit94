@@ -14,7 +14,7 @@ public class CashPayment extends Payment{
 		// TODO Auto-generated method stub
 		if(productPrice < 1) {
 			try {
-				throw new PaymentException("가격이나 할부개월수가 잘못되었습니다.");
+				throw new PaymentException("가격이 잘못되었습니다.");
 			} catch (PaymentException e) {
 				e.printStackTrace();
 			}
