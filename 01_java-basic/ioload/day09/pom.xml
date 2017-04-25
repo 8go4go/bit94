@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><Content>
+	<test.txt>
+		commons-fileupload
+commons-fileupload
+1.3.1
+	<test.txt/>
+	<pass>
+		1234
+	<pass/>
+	<abc.txt>
+		abcd
+efg
+hijk
+	<abc.txt/>
+	<id>
+		hong
+	<id/>
+<Content/>

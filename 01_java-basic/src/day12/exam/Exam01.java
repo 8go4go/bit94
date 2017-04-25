@@ -2,11 +2,11 @@ package day12.exam;
 
 import java.util.Calendar;
 
-public class Quiz01 {
+public class Exam01 {
     public static void main(String[] args) {
-    	Quiz01 q = new Quiz01();
+    	Exam01 q = new Exam01();
     	
-    	String[][] cals = q.getCalendar(2017, 4);
+    	String[][] cals = q.getCalendar(2017, 3);
     	
     	for(int i=0; i < cals.length; i++) {
     		if(i < 2) {
@@ -37,11 +37,11 @@ public class Quiz01 {
     	
     	cals[0] = new String[]{yearVal, monthVal};
     	cals[1] = dayWord;
-    	cals[2] = make7(dayWeek - 1, c);
+    	cals[2] = makeDays(dayWeek - 1, c);
     	return cals;
     }
     
-    private String[] make7(int skip, Calendar c) {
+    private String[] makeDays(int skip, Calendar c) {
     	String[] cals = new String[42];
     	
     	c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
