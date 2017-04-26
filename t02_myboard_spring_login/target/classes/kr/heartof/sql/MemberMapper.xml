@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.heartof.member.mapper.MemberMapper">
+
+	<select id="login" parameterType="kr.heartof.member.vo.LoginVO" resultType="int" >
+		select count(*) from member 
+		where
+			userid = #{userid} and
+			password = #{password}  
+	</select>
+
+	<insert id="registerMember" parameterType="kr.heartof.member.vo.MemberVO">
+		INSERT INTO member
+		(mem_id, last_name, first_name, phone, mobile, reg_date, 
+		expired_date, password, zip_id, status_id, email, userid, prof_id)
+		VALUES
+		(#{mem_id}, #{last_name}, #{first_name}, #{phone}, #{mobile}, #{reg_date},
+		 #{expired_date}, #{password} , #{zip_id}, #{status_id}, #{email}, #{userid} , #{prof_id});
+	</insert>
+	
+	<insert id="registerMember_File" parameterType="kr.heartof.common.vo.FileVO">
+		INSERT INTO test.file
+		(file_id, file_name, file_path, board_id, mem_id, origin_file_name)
+		VALUES 
+		(#{file_id}, #{file_name}, #{file_path}, 
+		#{board_id}, #{mem_id}, #{origin_file_name});
+	</insert>
+	
+	<insert id="registerMember_Status" parameterType="kr.heartof.member.vo.StatusVO">
+		INSERT INTO status
+		(status_id, status)
+		VALUES
+		(#{status_id}, #{status});
+	</insert>
+	
+	<insert id="registerMember_Interest" parameterType="kr.heartof.member.vo.InterestVO">
+		INSERT INTO interest
+		(interest_id, interest)
+		VALUES(#{interest_id}, #{interest});
+	</insert>
+	
+	<insert id="registerMember_MemInter" parameterType="kr.heartof.member.vo.MemberInterestVO">
+		INSERT INTO member_interest
+		(interest_id, mem_id, prof_id)
+		VALUES
+		(#{interest_id}, #{mem_id}, #{prof_id});		
+	</insert>
+	
+	<insert id="registerMember_Zip" parameterType="kr.heartof.member.vo.ZipVO">
+		INSERT INTO zip
+		(zip_id, city, state)
+		VALUES
+		(#{zip_id}, #{city}, #{state});
+	</insert>
+	
+	<insert id="registerMember_Profession" parameterType="kr.heartof.member.vo.ProfessionVO">
+		INSERT INTO profession
+		(prof_id, prof_name)
+		VALUES 
+		(#{prof_id}, #{prof_name});
+	</insert>
+	
+	<select id="maxMember" resultType="int">
+		select case 
+		when max(mem_id) is null then 1
+		else max(mem_id) + 1   		
+		end as mem_id from member;
+	</select>
+	
+	<select id="maxFile" resultType="int">
+		select case 
+		when max(file_id) is null then 1
+		else max(file_id) + 1   		
+		end as mem_id from file;
+	</select>
+	
+	<select id="maxProfession" resultType="int">
+		select case 
+		when max(prof_id) is null then 1
+		else max(prof_id) + 1   		
+		end as prof_id from profession;
+	</select>
+	
+	<select id="maxZip" resultType="int">
+		select case 
+		when max(zip_id) is null then 1
+		else max(zip_id) + 1   		
+		end as zip_id from zip;
+	</select>
+	
+	<select id="maxInterest" resultType="int">
+		select case 
+		when max(interest_id) is null then 1
+		else max(interest_id) + 1   		
+		end as interest_id from interest;
+	</select>
+	
+	<select id="maxStatus" resultType="int">
+		select case 
+		when max(status_id) is null then 1
+		else max(status_id) + 1   		
+		end as status_id from status;
+	</select>
+</mapper>

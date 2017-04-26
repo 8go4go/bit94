@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <!-- Uncomment and add your base-package here:
+         <context:component-scan
+            base-package="org.springframework.samples.service"/>  -->
+	<context:property-placeholder location="kr/heartof/sql/db.properties"/>
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driver}"></property>
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+	</bean>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" >
+		<property name="mapperLocations" value="classpath:kr/heartof/sql/*.xml"></property>
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" >
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+	
+	<!-- 게시판 -->
+	<bean id="dao" class="kr.heartof.board.dao.BoardDAO" >
+		<property name="sqlSessionTemplate" ref="sqlSession"></property>
+	</bean>
+
+	<bean id="ui" class="kr.heartof.board.ui.BoardUI" >
+		<property name="boardDao" ref="dao"></property>
+	</bean>
+	
+	<!-- 멤버 -->
+	<bean id="memberDao" class="kr.heartof.member.dao.MemberDAO" >
+		<property name="sqlSessionTemplate" ref="sqlSession"></property>
+	</bean>
+	<bean id="memberUi" class="kr.heartof.member.ui.LoginUI" >
+		<property name="memberDao" ref="memberDao"></property>
+	</bean>
+	
+	
+</beans>
