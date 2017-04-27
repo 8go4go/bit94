@@ -42,7 +42,7 @@ class Quiz06 {
  			if(f.isDirectory()) {
  				String fileStr = makeTab(f.getName(), depth);
  				System.out.println(fileStr);
- 				viewDir(f, ++depth);
+ 				viewDir(f, depth+1);
  			} else {
  				String fileStr = makeTab(f.getName(), depth);
  				System.out.println(fileStr);
