@@ -1,6 +1,8 @@
 package day14.quiz;
 
-import java.io.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 class Quiz06 {
 	public static void main(String args[]) {
@@ -38,21 +40,22 @@ class Quiz06 {
  		
  		for(File f : list) {
  			if(f.isDirectory()) {
- 				StringBuffer sb = new StringBuffer();
- 				for(int i=0; i < depth; i++) {
- 					sb.append("\t");
- 				}
- 				sb.append(f.getName());
- 				System.out.println(sb.toString());
+ 				String fileStr = makeTab(f.getName(), depth);
+ 				System.out.println(fileStr);
  				viewDir(f, ++depth);
  			} else {
- 				StringBuffer sb = new StringBuffer();
- 				for(int i=0; i < depth; i++) {
- 					sb.append("\t");
- 				}
- 				sb.append(f.getName());
- 				System.out.println(sb.toString());
+ 				String fileStr = makeTab(f.getName(), depth);
+ 				System.out.println(fileStr);
  			}
  		}
+	}
+ 	
+	private static String makeTab(String name, int depth) {
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < depth; i++) {
+			sb.append("    ");
+		}
+		sb.append(name);
+		return sb.toString();
 	}
 }
