@@ -1,0 +1,48 @@
+- day02
+   Test01 : 명령형 매개변수 테스트 하는 예제
+   Test02 : 문자열의 "+" 연산자 테스트
+   Test03 : 문자열의 "+" 연산자 테스트
+   Test04 : 문자열을 숫자로 변경 하는 예제
+   Test05 : print, println
+   Test06 : printf 테스트
+   Test07 : println 과 printf 비교 예제
+   Test08 : 기본 자료형 테스트
+   Test09 : import문 테스트
+   Test10 : 변수의 범위 예제
+   Test11 : 변수의 범위 예제(for)
+  
+   Quiz02 : 변수의 범위 퀴즈(Exception)
+  
+- day03
+   Test01 : 형변환 예제
+   Test02 : 상수 예제(final) & 문자열 상수
+   Test03 : 메서드 호출 예제(Random Test)
+   TestSub03 : 메서드 선언
+   Test04 : 3항 연산자 테스트(Random)
+   Test05 : 산술 연산자 & 3항 연산자 테스트
+   Test06 : 증감 연산자 & 논리 연산자 & 배정 연산자 예제
+   Test07 : 조건문 예제(if)
+   Test08 : switch 예제
+   Test09 : Scanner 예제
+   
+   Quiz01 : else if 퀴즈
+   Quiz02 : switch 퀴즈
+   
+- day04
+   Test01 : 반복문 테스트(for)
+   Test02 : 구구단 예제(2중 for)
+   Test03 : break, continue 예제
+   Test04 : break의 활용 예제
+   Test05 : while 예제
+   
+   Quiz01 : 반복문
+   Quiz02 : 별 찍기
+   Quiz03 : break, continue 퀴즈
+   Quiz04 : 반복문 퀴즈
+   
+- day05
+   Test01 : 배열 예제
+   Test02 : 
+   Test03 : 다차원 배열 예제
+   Test04 : 배열 탐험 예저
+   Test05 : 배열 카피

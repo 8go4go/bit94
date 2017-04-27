@@ -16,10 +16,23 @@ public class MemberVO {
 	private String password;
 	private String zip_id;
 	private String status_id;
+	private String prof_id;
 	private String email;
 	
-	private FileVO file;
-	
+	/**
+	 * @return the prof_id
+	 */
+	public String getProf_id() {
+		return prof_id;
+	}
+
+	/**
+	 * @param prof_id the prof_id to set
+	 */
+	public void setProf_id(String prof_id) {
+		this.prof_id = prof_id;
+	}
+
 	public String getMem_id() {
 		return mem_id;
 	}

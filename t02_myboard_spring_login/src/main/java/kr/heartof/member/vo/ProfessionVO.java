@@ -2,7 +2,7 @@ package kr.heartof.member.vo;
 
 public class ProfessionVO {
 	private int prof_id;
-	private String profession;
+	private String prof_name;
 	/**
 	 * @return the prof_id
 	 */
@@ -16,15 +16,16 @@ public class ProfessionVO {
 		this.prof_id = prof_id;
 	}
 	/**
-	 * @return the profession
+	 * @return the prof_name
 	 */
-	public String getProfession() {
-		return profession;
+	public String getProf_name() {
+		return prof_name;
 	}
 	/**
-	 * @param profession the profession to set
+	 * @param prof_name the prof_name to set
 	 */
-	public void setProfession(String profession) {
-		this.profession = profession;
+	public void setProf_name(String prof_name) {
+		this.prof_name = prof_name;
 	}
+
 }

@@ -2,103 +2,194 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.heartof.member.mapper.MemberMapper">
 
-	<select id="login" parameterType="kr.heartof.member.vo.LoginVO" resultType="int" >
-		select count(*) from member 
+	<resultMap id="zipMap" type="kr.heartof.member.vo.ZipVO">
+		<id property="zip_id" column="zip_id" />
+		<result property="city" column="city" />
+		<result property="state" column="state" />
+	</resultMap>
+	
+	<resultMap id="professionMap" type="kr.heartof.member.vo.ProfessionVO">
+		<id property="prof_id" column="prof_id" />
+		<result property="prof_name" column="prof_name" />
+	</resultMap>
+	
+	<resultMap id="statusMap" type="kr.heartof.member.vo.StatusVO">
+		<id property="status_id" column="status_id" />
+		<result property="status" column="status" />
+	</resultMap>
+	
+	<resultMap id="interestMap" type="kr.heartof.member.vo.InterestVO">
+		<id property="interest_id" column="interest_id" />
+		<result property="interest" column="interest" />
+	</resultMap>
+
+	<!-- 로그인 -->
+	<select id="login" parameterType="kr.heartof.member.vo.LoginVO"
+		resultType="int">
+		select count(*) from member
 		where
-			userid = #{userid} and
-			password = #{password}  
+		userid = #{userid} and
+		password = #{password}
 	</select>
+	<!-- 아이디 찾기 -->
+	<select id="findId" parameterType="kr.heartof.member.vo.MemberVO"
+		resultType="String">
+		select userid from member
+		where
+		email = #{email} and
+		phone = #{phone}
+	</select>
+
+	<!-- 패스워드 찾기 -->
+	<select id="findPass" parameterType="kr.heartof.member.vo.MemberVO"
+		resultType="String">
+		select password from member
+		where
+		userid = #{userid} and
+		email = #{email} and
+		phone = #{phone}
+	</select>
+
+	<!-- 회원 정보 -->
+	<select id="userinfo" parameterType="kr.heartof.member.vo.MemberVO"
+		resultType="kr.heartof.member.vo.MemberVO">
+		select * from member
+		where
+		userid = #{userid}
+	</select>
+
+	<!-- 회원 정보 수정 -->
+	<update id="userModify" parameterType="kr.heartof.member.vo.MemberVO">
+		update member
+		set
+		phone = #{phone},
+		mobile = #{mobile},
+		email = #{email}
+		password = #{password}
+		where
+		userid = #{userid}
+	</update>
+
+	<!-- 집주소 가져오기 -->
+	<select id="zip" resultMap="zipMap">
+		select *
+		from zip
+	</select>
+
+	<!-- 직업 가져오기 -->
+	<select id="profession" resultMap="professionMap">
+		select * from profession
+	</select>
+
+	<!-- 관심사 가져오기 -->
+	<select id="interest" resultMap="interestMap">
+		select * from interest
+	</select>
+
+	<!-- 상태 가져오기 -->
+	<select id="status" resultMap="statusMap">
+		select * from status
+	</select>
+
+
 
 	<insert id="registerMember" parameterType="kr.heartof.member.vo.MemberVO">
 		INSERT INTO member
-		(mem_id, last_name, first_name, phone, mobile, reg_date, 
+		(mem_id, last_name, first_name, phone, mobile, reg_date,
 		expired_date, password, zip_id, status_id, email, userid, prof_id)
 		VALUES
-		(#{mem_id}, #{last_name}, #{first_name}, #{phone}, #{mobile}, #{reg_date},
-		 #{expired_date}, #{password} , #{zip_id}, #{status_id}, #{email}, #{userid} , #{prof_id});
+		(#{mem_id}, #{last_name}, #{first_name}, #{phone}, #{mobile}, now(),
+		now(), #{password} , #{zip_id}, #{status_id}, #{email}, #{userid} ,
+		#{prof_id});
 	</insert>
-	
+
 	<insert id="registerMember_File" parameterType="kr.heartof.common.vo.FileVO">
-		INSERT INTO test.file
-		(file_id, file_name, file_path, board_id, mem_id, origin_file_name)
-		VALUES 
-		(#{file_id}, #{file_name}, #{file_path}, 
+		INSERT INTO
+		test.file
+		(file_id, file_name, file_path, board_id, mem_id,
+		origin_file_name)
+		VALUES
+		(#{file_id}, #{file_name}, #{file_path},
 		#{board_id}, #{mem_id}, #{origin_file_name});
 	</insert>
-	
+
 	<insert id="registerMember_Status" parameterType="kr.heartof.member.vo.StatusVO">
-		INSERT INTO status
+		INSERT INTO
+		status
 		(status_id, status)
 		VALUES
 		(#{status_id}, #{status});
 	</insert>
-	
+
 	<insert id="registerMember_Interest" parameterType="kr.heartof.member.vo.InterestVO">
-		INSERT INTO interest
+		INSERT INTO
+		interest
 		(interest_id, interest)
 		VALUES(#{interest_id}, #{interest});
 	</insert>
-	
+
 	<insert id="registerMember_MemInter" parameterType="kr.heartof.member.vo.MemberInterestVO">
-		INSERT INTO member_interest
-		(interest_id, mem_id, prof_id)
+		INSERT INTO
+		member_interest
+		(interest_id, mem_id)
 		VALUES
-		(#{interest_id}, #{mem_id}, #{prof_id});		
+		(#{interest_id}, #{mem_id});
 	</insert>
-	
+
 	<insert id="registerMember_Zip" parameterType="kr.heartof.member.vo.ZipVO">
 		INSERT INTO zip
 		(zip_id, city, state)
 		VALUES
 		(#{zip_id}, #{city}, #{state});
 	</insert>
-	
+
 	<insert id="registerMember_Profession" parameterType="kr.heartof.member.vo.ProfessionVO">
-		INSERT INTO profession
+		INSERT INTO
+		profession
 		(prof_id, prof_name)
-		VALUES 
+		VALUES
 		(#{prof_id}, #{prof_name});
 	</insert>
-	
-	<select id="maxMember" resultType="int">
-		select case 
+
+	<select id="maxMember" resultType="Integer">
+		select case
 		when max(mem_id) is null then 1
-		else max(mem_id) + 1   		
+		else max(mem_id) + 1
 		end as mem_id from member;
 	</select>
-	
+
 	<select id="maxFile" resultType="int">
-		select case 
+		select case
 		when max(file_id) is null then 1
-		else max(file_id) + 1   		
+		else max(file_id) + 1
 		end as mem_id from file;
 	</select>
-	
+
 	<select id="maxProfession" resultType="int">
-		select case 
+		select case
 		when max(prof_id) is null then 1
-		else max(prof_id) + 1   		
+		else max(prof_id) + 1
 		end as prof_id from profession;
 	</select>
-	
+
 	<select id="maxZip" resultType="int">
-		select case 
+		select case
 		when max(zip_id) is null then 1
-		else max(zip_id) + 1   		
+		else max(zip_id) + 1
 		end as zip_id from zip;
 	</select>
-	
+
 	<select id="maxInterest" resultType="int">
-		select case 
+		select case
 		when max(interest_id) is null then 1
-		else max(interest_id) + 1   		
+		else max(interest_id) + 1
 		end as interest_id from interest;
 	</select>
-	
+
 	<select id="maxStatus" resultType="int">
-		select case 
+		select case
 		when max(status_id) is null then 1
-		else max(status_id) + 1   		
+		else max(status_id) + 1
 		end as status_id from status;
 	</select>
 </mapper>
