@@ -150,12 +150,9 @@ class FileFinder {
 		}
 		if(searchedList.size() > 0) {
 			int foundCount = 0;
-			StringBuffer sb = new StringBuffer();
 			for(File f : searchedList) {
 				String fn = f.getName();
-				seachResult.add(fn + "\n");
-				sb.append(fn + "\n");
-				System.out.println("파일명 : " + fn);
+				seachResult.add("파일명 : " + fn + "\n");
 				
 				BufferedReader br = new BufferedReader(new FileReader(f));
 				String data="";
@@ -164,18 +161,18 @@ class FileFinder {
 					if(data.contains(searchWord)) {
 						foundCount++;
 						atomCount++;
-						sb.append(data.replaceAll(searchWord, String.valueOf(delm+searchWord+delm)).trim()).append("\n");
+						seachResult.add(data.replaceAll(searchWord, String.valueOf(delm+searchWord+delm)).trim() + "\n");
 					}
 				}
 				br.close();
 				if(atomCount < 1) {
 					seachResult.add("결과가 없습니다.\n");
-					System.out.println("결과가 없습니다.");
 				}
+				seachResult.add("\n");
+				
 			}
 			if(foundCount > 0) {
-				seachResult.add(sb.toString());
-				System.out.println(sb.toString());
+				System.out.println(seachResult.toString());
 			} else {
 				seachResult.add("결과가 없습니다." + "\n");
 			}
