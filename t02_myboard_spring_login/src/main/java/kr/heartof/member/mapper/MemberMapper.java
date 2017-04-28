@@ -7,10 +7,13 @@ import kr.heartof.member.vo.MemberInterestVO;
 import kr.heartof.member.vo.MemberVO;
 import kr.heartof.member.vo.ProfessionVO;
 import kr.heartof.member.vo.StatusVO;
+import kr.heartof.member.vo.UserInfoVO;
 import kr.heartof.member.vo.ZipVO;
 
 public interface MemberMapper {
 	public int login(LoginVO vo);
+	
+	public UserInfoVO userInfo(String userid);
 	
 	public void registerMember(MemberVO vo);
 	

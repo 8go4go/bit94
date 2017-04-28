@@ -22,7 +22,7 @@
 		<id property="interest_id" column="interest_id" />
 		<result property="interest" column="interest" />
 	</resultMap>
-
+	
 	<!-- 로그인 -->
 	<select id="login" parameterType="kr.heartof.member.vo.LoginVO"
 		resultType="int">
@@ -51,11 +51,16 @@
 	</select>
 
 	<!-- 회원 정보 -->
-	<select id="userinfo" parameterType="kr.heartof.member.vo.MemberVO"
-		resultType="kr.heartof.member.vo.MemberVO">
-		select * from member
+	<select id="userInfo" parameterType="String"
+		resultType="kr.heartof.member.vo.UserInfoVO">
+		select a.mem_id, a.last_name, a.first_name, a.phone, 
+				a.mobile, a.reg_date, b.city, b.state, 
+				c.prof_name, s.status, i.interest, mi.interest_id   
+		from 
+			member a NATURAL  join zip b NATURAL  join profession c NATURAL join status s natural join member_interest mi
+		natural join interest i
 		where
-		userid = #{userid}
+			a.userid = #{value};
 	</select>
 
 	<!-- 회원 정보 수정 -->

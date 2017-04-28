@@ -10,6 +10,7 @@ import kr.heartof.member.vo.MemberInterestVO;
 import kr.heartof.member.vo.MemberVO;
 import kr.heartof.member.vo.ProfessionVO;
 import kr.heartof.member.vo.StatusVO;
+import kr.heartof.member.vo.UserInfoVO;
 import kr.heartof.member.vo.ZipVO;
 
 public class MemberDAO {
@@ -69,5 +70,9 @@ public class MemberDAO {
 	
 	public int getMaxMember() {
 		return session.selectOne("kr.heartof.member.mapper.MemberMapper.maxMember");
+	}
+
+	public UserInfoVO userInfo(String userid) {
+		return session.selectOne("kr.heartof.member.mapper.MemberMapper.userInfo", userid);
 	}
 }

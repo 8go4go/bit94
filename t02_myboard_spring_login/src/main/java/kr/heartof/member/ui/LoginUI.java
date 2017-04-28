@@ -10,13 +10,14 @@ import kr.heartof.member.vo.MemberInterestVO;
 import kr.heartof.member.vo.MemberVO;
 import kr.heartof.member.vo.ProfessionVO;
 import kr.heartof.member.vo.StatusVO;
+import kr.heartof.member.vo.UserInfoVO;
 import kr.heartof.member.vo.ZipVO;
 
 public class LoginUI {
 	private boolean isLogin = false;
 	private Scanner sc = null;
 	private MemberDAO dao = null;
-	
+	private String userid = null;
 	public LoginUI() {
 		sc = new Scanner(System.in);
 	}
@@ -57,17 +58,61 @@ public class LoginUI {
 					registerMember();
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
-					e.printStackTrace();
 				}
 					break;
 				case 4: // modify member
+				try {
+					modifyMember();
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
 					break;
 				case 5: // view board
+					break;
+				case 6:
+					userid = null;
 					break;
 			}
 		}
 	}
 	
+	private void modifyMember() throws Exception {
+		if(userid != null) {
+			UserInfoVO uiv = dao.userInfo(userid);
+			
+			System.out.println("1.성 : " + uiv.getLast_name());
+			System.out.println("2.이름 : " + uiv.getFirst_name());
+			System.out.println("3.전화번호 : " + uiv.getPhone());
+			System.out.println("*.등록일 : " + uiv.getReg_date().toString());
+			System.out.println("4.도시 : " + uiv.getCity());
+			System.out.println("  .구 : " + uiv.getState());
+			System.out.println("5.결혼 유무 : " + uiv.getStatus());
+			System.out.println("6.관심사 : " + uiv.getInterest());
+			System.out.println("7.수정 적용");
+			System.out.println("수정할 부분의 번호를 입력하세요");
+			int subMenu = getInputIntData();
+			
+			switch(subMenu) {
+			case 1:   // 성
+				break;
+			case 2:   // 이름
+				break;
+			case 3:   // 전화번호
+				break;
+			case 4:   // 도시
+				break;
+			case 5:   // 결혼유무
+				break;
+			case 6:   // 관심사
+				break;
+			case 7:   // 수정 적용
+				break;
+			}
+		} else {
+			throw new Exception("로그인이 필요합니다. 먼저 로그인 해주세요");
+		}
+	}
+
 	private void registerMember() throws Exception {
 		MemberVO vo = new MemberVO();
 		int member_id = dao.getMaxMember();
@@ -150,9 +195,10 @@ public class LoginUI {
 		
 		boolean isResult = dao.login(id, password);
 		
-		if(isResult)
+		if(isResult) {
 			System.out.println("로그인 성공");
-		else
+			userid = id;
+		} else
 			System.out.println("아이디 또는 패스워드를 확인하세요");
 			
 	}
@@ -166,6 +212,7 @@ public class LoginUI {
 		sb.append("3. 회원가입").append("\n");
 		sb.append("4. 회원정보수정").append("\n");
 		sb.append("5. 게시판 보기").append("\n");
+		sb.append("6. 로그아웃").append("\n");
 		sb.append("-----------------\n");
 		sb.append("메뉴 중 처리할 항목을 선택하세요 : ");
 
