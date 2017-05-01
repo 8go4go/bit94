@@ -116,7 +116,7 @@ SELECT * FROM S_EMP WHERE SALARY BETWEEN 1500 AND 4000 AND DEPT_ID IN (112, 118)
 SELECT * FROM S_EMP WHERE MANAGER_ID IS NULL;
 
 --3. 직급이 부장이어야 하고 급여는 3000 이상을 받는 직원의 이름, 직급, 급여를 조회하시오.
-SELECT * FROM S_EMP WHERE MANAGER_ID = 1; 	
+SELECT * FROM S_EMP WHERE MANAGER_ID = 1 AND SALARY >= 3000; 	
 
 --4. 직급이 부장과 과장인 사람들을 대상을 이름, 직급, 급여를 조회하시오. 단, 부서는 112, 113,
 --117, 118 부서중에서 조회해야 하며, 급여는 2300 이상 3000 사이인 직원만 조회되도록
@@ -124,7 +124,7 @@ SELECT * FROM S_EMP WHERE MANAGER_ID = 1;
 SELECT * FROM S_EMP WHERE  SALARY BETWEEN 2300 AND 3000 AND DEPT_ID IN (112, 113, 117, 118);
 
 --5. 직급이 부장 혹은 과장이면서 03월에 입사한 직원의 이름, 직급, 급여, 입사일을 조회하시오.
-SELECT * FROM S_EMP WHERE MANAGER_ID IN (1, 2) AND TO_CHAR(sysdate, 'MM') = '03'
+SELECT * FROM S_EMP WHERE MANAGER_ID IN (1, 2) AND TO_CHAR(START_DATE, 'MM') = '03'
 
 -- 6. 직원의 연봉에 1000 을 더한 값을 조회하시오. 연봉은 급여에 16을 곱하면 된다.
 SELECT (SALARY*16) + 1000 AS SALARY FROM S_EMP 
@@ -137,7 +137,7 @@ SELECT (SALARY*16) + 1000 AS SALARY FROM S_EMP
 --서의홍 총무부장의 급여 3000
 --김심선 인사부장의 급여 3200 
 
-SELECT NAME ||' ' || TITLE || '의 급여 ' || SALARY FROM S_EMP WHERE MANAGER_ID = 1 OR MAILID IS NULL;
+SELECT NAME ||' ' || TITLE || '의 급여 ' || SALARY FROM S_EMP WHERE MANAGER_ID = 1 OR MANAGER_ID IS NULL;
 
 --8. 커미션을 받는 직원과 관리자가 있는 직원을 대상으로 급여를 2500이상 받는 직원만 조회하시
 --오. 
