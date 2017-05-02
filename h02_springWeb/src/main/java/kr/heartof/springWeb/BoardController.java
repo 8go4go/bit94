@@ -38,4 +38,22 @@ public class BoardController {
 		model.addAttribute("result", Boolean.valueOf(boardCommand.insert(vo)));
 		return "board/writeOk";
 	}
+	
+	@RequestMapping("/modify")
+	public String modifyForm(BoardVO vo, Model model) {
+		model.addAttribute("modify", boardCommand.detail(vo));
+		return "board/modfiyForm";
+	}
+	
+	@RequestMapping("/modifyOk")
+	public String modifyOk(BoardVO vo, Model model) {
+		model.addAttribute("result", Boolean.valueOf(boardCommand.modify(vo)));
+		return "board/modifyOk";
+	}
+	
+	@RequestMapping("/deleteOk")
+	public String deleteOk(BoardVO vo, Model model) {
+		model.addAttribute("result", Boolean.valueOf(boardCommand.delete(vo)));
+		return "board/deleteOk";
+	}
 }

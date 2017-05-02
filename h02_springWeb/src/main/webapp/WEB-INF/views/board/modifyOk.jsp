@@ -6,11 +6,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="${contextPath}/resources/board.css" >
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>글쓰기 완료 여부 : ${result}</h1>
+	<h1>수정 완료 여부 : ${result}</h1>
 	<a href="${contextPath}/board/">목록으로</a>
 </body>
 </html>
