@@ -23,7 +23,7 @@ public class BoardDAOImpl implements BoardDAO{
 	public List<BoardVO> list() {
 		 JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);  
 		
-		 List<BoardVO> list = jdbcTemplate.query("select NO, title, writer, content, reg_date from tb_board", new RowMapper<BoardVO>() {
+		 List<BoardVO> list = jdbcTemplate.query("select NO, title, writer, content, reg_date from tb_board order by NO desc", new RowMapper<BoardVO>() {
 			@Override
 			public BoardVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 				BoardVO v = new BoardVO();
