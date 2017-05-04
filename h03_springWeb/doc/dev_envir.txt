@@ -1,0 +1,8 @@
+[Server 구성]
+1. ubuntu 16.4.0 Server
+2. mysql 
+3. jboss 
+4. nginx
+5. ssh
+6. openJDK 8
+================
