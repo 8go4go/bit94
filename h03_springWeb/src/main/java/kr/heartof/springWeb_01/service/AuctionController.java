@@ -15,5 +15,8 @@ public class AuctionController {
 		return "service/item";
 	}
 	
-	
+	@RequestMapping("/service/addItem")
+	public String showAddItem() {
+		return "service/addItem";
+	}
 }

@@ -6,25 +6,26 @@
 <!DOCTYPE html>
 <html lang="kr">
 <head>
-<script src="https://code.jquery.com/jquery.min.js"></script>
-<link
-	href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css"
-	rel="stylesheet" type="text/css" />
-<script
-	src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#mainModal").modal("show");
-	});
-</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="비트 경매 사이트에 오신것을 환영합니다.">
 <meta name="author" content="bit94 fifth team">
+
+<link rel="stylesheet" href="${contextPath}/resources/css/jquery/jquery-ui.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/bootstrap/bootstrap.css">
+<script src="${contextPath}/resources/js/jquery/jquery-3.2.1.js"></script>
+<script src="${contextPath}/resources/js/jquery/jquery-ui.js"></script>
+<script src="${contextPath}/resources/js/bootstrap/bootstrap.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#mainModal").modal("show");
+	});
+</script>
+
 <title>비트 중고 경매</title>
 </head>
-<body>
+<body style="background-image: url(${contextPath}/resources/imgs/auction.png)">
 	<div id="mainModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 
