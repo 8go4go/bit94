@@ -23,6 +23,7 @@
 	https://www.highcharts.com/
 
 [sql 및 db 설계]
+	http://www.databaseanswers.org/data_models/index.htm
 
 ====== 정의홍, 김을진, 김용재 ===========
 
@@ -31,5 +32,3 @@
 [Eclipse debugging 방법]
 
 [mysql] 
-
-
