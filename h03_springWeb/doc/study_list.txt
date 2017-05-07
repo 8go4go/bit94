@@ -1,6 +1,7 @@
 ====== 정의홍, 김을진 ============
 [스프링]
 	youtube.com 에서 스프링 강좌로 검색 - 첫번째 항목 선택 (30강)
+	Spring Security and Injection을 통한 session 처리
 
 [jstl] => jsp + html + javascript 소스상에서 가독성을 높이기 위한 Java Server Page 표준 lib 
 	https://www.tutorialspoint.com/jsp/jsp_standard_tag_library.htm
@@ -13,6 +14,8 @@
 [css]
 	https://www.w3schools.com/css/default.asp
 
+[bootstrap]
+	https://www.w3schools.com/bootstrap/default.asp
 [javascript]
 	https://www.w3schools.com/js/default.asp
 
@@ -21,6 +24,8 @@
 
 [hichart]
 	https://www.highcharts.com/
+
+
 
 [sql 및 db 설계]
 	http://www.databaseanswers.org/data_models/index.htm
