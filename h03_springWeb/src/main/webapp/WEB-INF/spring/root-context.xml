@@ -8,18 +8,27 @@
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		 <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
 		<property name="url" value="jdbc:mysql://192.168.0.149:3306/test" />
 		<property name="username" value="lee" />
 		<property name="password" value="1234" />
 	</bean>
 
 	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="mapperLocations" value="classpath:kr/heartof/springWeb_01/sql/mybatis/mappers/*Mapper.xml"></property>	
+		<property name="mapperLocations"
+			value="classpath:kr/heartof/springWeb_01/sql/mybatis/mappers/*Mapper.xml"></property>
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg name="sqlSessionFactory" ref="sessionFactory"></constructor-arg>
+	</bean>
+
+	<bean id="memberCommand"
+		class="kr.heartof.springWeb_01.command.member.MemberCommandImpl">
+	</bean>
+
+	<bean id="memberController" class="kr.heartof.springWeb_01.member.MemberController">
+		<property name="command" ref="memberCommand" />
 	</bean>
 </beans>

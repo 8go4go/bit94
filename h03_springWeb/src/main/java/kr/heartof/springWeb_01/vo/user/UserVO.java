@@ -5,6 +5,7 @@ import java.util.Date;
 public class UserVO {
 	private int USR_NO	;
 	private String USRID   ;
+	private String PASSWD   ;
 	private String EMAIL   ;
 	private String TELNO   ;
 	private String ZIPNO   ;
@@ -39,8 +40,21 @@ public class UserVO {
 	/**
 	 * @return the eMAIL
 	 */
+	
 	String getEMAIL() {
 		return EMAIL;
+	}
+	/**
+	 * @return the pASSWD
+	 */
+	String getPASSWD() {
+		return PASSWD;
+	}
+	/**
+	 * @param pASSWD the pASSWD to set
+	 */
+	void setPASSWD(String pASSWD) {
+		PASSWD = pASSWD;
 	}
 	/**
 	 * @param eMAIL the eMAIL to set
