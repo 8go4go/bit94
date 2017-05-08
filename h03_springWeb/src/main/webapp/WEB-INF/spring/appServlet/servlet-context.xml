@@ -25,6 +25,16 @@
 	
 	<context:component-scan base-package="kr.heartof.springWeb_01" />
 	
-	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/member/memberinfo"/>
+			<mvc:mapping path="/member/modifyOk"/>
+			<mvc:mapping path="/member/loginConfirm"/>
+			<mvc:mapping path="/service/auction/**"/>
+			
+			<mvc:mapping path="/admin/**"/>
+			<beans:bean class="kr.heartof.springWeb_01.intercepter.LoginInterceptor"></beans:bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 	
 </beans:beans>
