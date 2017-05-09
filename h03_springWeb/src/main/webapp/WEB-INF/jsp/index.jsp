@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -14,6 +15,8 @@
 
 <link rel="stylesheet" href="${contextPath}/resources/css/jquery/jquery-ui.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/bootstrap/bootstrap.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.11.1/validate.min.js"></script>
+
 <script src="${contextPath}/resources/js/jquery/jquery-3.2.1.js"></script>
 <script src="${contextPath}/resources/js/jquery/jquery-ui.js"></script>
 <script src="${contextPath}/resources/js/bootstrap/bootstrap.js"></script>

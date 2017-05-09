@@ -12,7 +12,7 @@
 				</h1>
 				<hr>
 				<form class="form-horizontal" method="post" name="signup"
-					id="signup" enctype="multipart/form-data">
+					id="signup" enctype="multipart/form-data" id="signupForm">
 					<div class="form-group">
 						<label class="control-label col-sm-3">이메일ID <span
 							class="text-danger">*</span></label>
@@ -20,7 +20,7 @@
 							<div class="input-group">
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-envelope"></i></span> <input type="email"
-									class="form-control" name="emailid" id="emailid"
+									class="form-control" name="EMAIL" id="EMAIL"
 									placeholder="Email을 입력하세요" value="">
 							</div>
 						</div>
@@ -33,7 +33,7 @@
 							<div class="input-group">
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-lock"></i></span> <input type="password"
-									class="form-control" name="password" id="password"
+									class="form-control" name="PASSWD" id="PASSWD"
 									placeholder="5~15자로 패스워드를 입력하세요" value="">
 							</div>
 						</div>
@@ -45,7 +45,7 @@
 							<div class="input-group">
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-lock"></i></span> <input type="password"
-									class="form-control" name="cpassword" id="cpassword"
+									class="form-control" name="CPASSWD" id="CPASSWD"
 									placeholder="다시한번 패스워드를 입력하세요" value="">
 							</div>
 						</div>
@@ -178,14 +178,17 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-3">성별 <span
+						<label class="control-label col-sm-3">회원구분 <span
 							class="text-danger">*</span></label>
 						<div class="col-md-8 col-sm-9">
-							<label> <input name="gender" type="radio" value="Male"
-								checked> 남자
-							</label> <label> <input name="gender" type="radio" value="Female">
-								여자
+							<label> 
+							<input id="" name="USR_CD" type="radio" value="1">
+									기업
 							</label>
+							<label> 
+							<input id="" name="USR_CD" type="radio" value="2" checked> 
+									개인
+							</label> 
 						</div>
 					</div>
 					<div class="form-group">
@@ -195,16 +198,23 @@
 							<div class="input-group">
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-phone"></i></span> <input type="text"
-									class="form-control" name="contactnum" id="contactnum"
+									class="form-control" name="TELNO" id="TELNO"
 									placeholder="연락처를 입력하세요" value="">
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-3">다른 연락처<br></label>
+						<label class="control-label col-sm-3">우편번호<br></label>
 						<div class="col-md-5 col-sm-8">
 							<input type="text" class="form-control" name="contactnum2"
-								id="contactnum2" placeholder="연락 가능한 다른 연락처를 입력하세요" value="">
+								id="ZIPNO" placeholder="우편번호를 입력하세요" value="">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-3">주소<br></label>
+						<div class="col-md-5 col-sm-8">
+							<input type="text" class="form-control" name="contactnum2"
+								id="ADDRESS" placeholder="주소를 입력하세요" value="">
 						</div>
 					</div>
 					<div class="form-group">

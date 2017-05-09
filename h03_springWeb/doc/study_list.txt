@@ -25,7 +25,14 @@
 [hichart]
 	https://www.highcharts.com/
 
+[validation]
+	https://validatejs.org/
+	호환성 테스트 : jQuery, tested with 1.7.2, 1.8.3, 1.9.1, 1.11.1, 3.1.1
 
+https://jqueryvalidation.org/rangelength-method/
+http://hellogk.tistory.com/48
+http://ojtiger.com/178
+http://fruitdev.tistory.com/172
 
 [sql 및 db 설계]
 	http://www.databaseanswers.org/data_models/index.htm

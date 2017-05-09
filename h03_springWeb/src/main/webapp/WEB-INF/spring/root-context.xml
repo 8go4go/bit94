@@ -9,7 +9,7 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
-		<property name="url" value="jdbc:mysql://192.168.0.149:3306/test" />
+		<property name="url" value="jdbc:mysql://192.168.0.2:3306/test" />
 		<property name="username" value="lee" />
 		<property name="password" value="1234" />
 	</bean>
@@ -24,11 +24,15 @@
 		<constructor-arg name="sqlSessionFactory" ref="sessionFactory"></constructor-arg>
 	</bean>
 
-	<bean id="memberCommand"
-		class="kr.heartof.springWeb_01.command.member.MemberCommandImpl">
-	</bean>
+<!-- 	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" /> -->
 
-	<bean id="memberController" class="kr.heartof.springWeb_01.member.MemberController">
-		<property name="command" ref="memberCommand" />
-	</bean>
+
+<!-- 	<bean id="memberCommand" -->
+<!-- 		class="kr.heartof.springWeb_01.command.member.MemberCommandImpl"> -->
+<!-- 		<property name="sqlSession" ref="sqlSession"></property> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="memberController" class="kr.heartof.springWeb_01.member.MemberController"> -->
+<!-- 		<property name="command" ref="memberCommand" /> -->
+<!-- 	</bean> -->
 </beans>

@@ -22,36 +22,31 @@
 				<ul class="nav navbar-nav">
 					<li><a href="#">비트 중고 경매란...</a></li>
 					<li><a href="#" data-toggle="modal" data-target="#memberModal">회원정보</a></li>
+					<li><a href="#" data-toggle="modal" data-target="#memberModal">회원가입</a></li>
 					<li><a href="#">고객센터</a></li>
 				</ul>
 				
-				<c:choose>
-					<c:when test="${!isLogin}">
-						<button class="btn navbar-btn" data-toggle="modal" data-target="#loginModal">로그인</button>
-					</c:when>
-					<c:otherwise>
-						<button class="btn btn-danger navbar-btn" data-toggle="modal" data-target="#logoutModal">로그아웃</button>
-					</c:otherwise>	
-				</c:choose>
-				
-				<ul class="nav navbar-nav navbar-right">
-					<c:choose>
-					<c:when test="${!isLogin}">
-						<button class="btn btn-success navbar-btn" data-toggle="modal" data-target="#loginModal">경매참가</button>
-					</c:when>
-					<c:otherwise>
-						<button class="btn btn-danger navbar-btn" data-toggle="modal" data-target="#logoutModal">경매등록</button>
-					</c:otherwise>	
-				</c:choose>
+				<button class="btn navbar-btn" data-toggle="modal" data-target="#loginModal" >로그인</button>
+				<button class="btn btn-danger navbar-btn" data-toggle="modal" data-target="#logoutModal">로그아웃</button>
+								
+				<ul id="auctionMenu" class="nav navbar-nav navbar-right">
+					<li><button class="btn btn-success navbar-btn" data-toggle="modal" data-target="#loginModal">경매참가</button></li>
+					<li><button class="btn btn-danger navbar-btn" data-toggle="modal" data-target="#logoutModal">경매등록</button></li>
 				</ul>
-				
 			</div>
-			<!-- /.navbar-collapse -->
 		</div>
 		<!-- /.container -->
 	</nav>
 	
 	<div id="memberModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="container" >
+				<jsp:include page="../member/signup.jsp"></jsp:include>
+			</div>
+		</div>
+	</div>
+	
+	<div id="memberJoin" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<div class="container" >
 				<jsp:include page="../member/memberinfo.jsp"></jsp:include>
