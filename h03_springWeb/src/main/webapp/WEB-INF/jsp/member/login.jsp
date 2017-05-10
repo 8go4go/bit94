@@ -21,15 +21,15 @@
 						type="password" class="form-control" id="PASSWD" name="PASSWD"
 						placeholder="패스워드를 입력하세요">
 				</div>
-				<button type="submit" class="btn btn-sm btn-default" id="lognbtn">로그인</button>
-				<button type="submit" class="btn btn-sm btn-default">취소</button>
+				<button type="submit" class="btn btn-sm btn-default" id="loginbtn">로그인</button>
+				<button type="button" class="btn btn-default" data-dismiss="loginModal">취소</button>
 			</form>
 		</div>
 	</div>
 </div>
 
 <script>
-	$('#lognbtn').click(function(event){
+	$('#loginbtn').click(function(event){
 		$.ajax({
 			   type : 'POST',
 			   url : '/member/loginConfirm',

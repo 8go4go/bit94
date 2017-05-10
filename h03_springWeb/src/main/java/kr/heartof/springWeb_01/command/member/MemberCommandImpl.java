@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import kr.heartof.springWeb_01.command.Command;
 import kr.heartof.springWeb_01.constant.EnumUsrCD;
+import kr.heartof.springWeb_01.vo.user.CompanyUserVO;
+import kr.heartof.springWeb_01.vo.user.PrivateUserVO;
 import kr.heartof.springWeb_01.vo.user.UserVO;
 
 @Repository
@@ -36,11 +38,17 @@ public class MemberCommandImpl implements Command {
 	
 	public boolean joinMember(UserVO user) {
 		int result = 0;
+		user.setUSRID(user.getEMAIL().substring(0, user.getEMAIL().indexOf("@")));
 		result = sqlSession.insert("kr.heartof.springWeb_01.sql.mybatis.LoginMapper.joinUser", user);
-		if(EnumUsrCD.valueOf(user.getUSR_CD()) == EnumUsrCD.PRIVATE_USER) {
-			result = result + sqlSession.insert("kr.heartof.springWeb_01.sql.mybatis.LoginMapper.joinCompanyUser", user);
+		
+		logger.info("joinMember : " + user.getUSR_CD());
+		
+		if(user.getUSR_CD().equals(EnumUsrCD.PRIVATE_USER.getKey())) {
+			PrivateUserVO pvo = (PrivateUserVO)user;
+			result = result + sqlSession.insert("kr.heartof.springWeb_01.sql.mybatis.LoginMapper.joinPrivateUser", pvo);
 		} else {
-			result = result + sqlSession.insert("kr.heartof.springWeb_01.sql.mybatis.LoginMapper.joinPrivateUser", user);
+			CompanyUserVO cvo = (CompanyUserVO)user;
+			result = result + sqlSession.insert("kr.heartof.springWeb_01.sql.mybatis.LoginMapper.joinCompanyUser", cvo);
 		}
 		return result == 2;
 	}

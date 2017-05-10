@@ -12,12 +12,13 @@
 	
 	<insert id="joinUser" parameterType="kr.heartof.springWeb_01.vo.user.UserVO">
 		INSERT INTO USR
-			(USRID, EMAIL, TELNO, ZIPNO, ADDRESS, REG_DATE,
+			(USRID, PASSWD, EMAIL, TELNO, 
+			ZIPNO, ADDRESS, REG_DATE,
 			USR_CD, CRE_DEG_CD) VALUES (
-				,#{USRID}, #{EMAIL}, #{TELNO},
+				#{USRID}, #{PASSWD}, #{EMAIL}, #{TELNO},
 				#{ZIPNO}, #{ADDRESS}, NOW(),
-				#{USR_CD}, 
-			);
+				#{USR_CD}, '1'
+			)
 		<selectKey keyProperty="USR_NO" resultType="Integer" order="AFTER">
         	SELECT LAST_INSERT_ID()
     	</selectKey>	
@@ -29,13 +30,13 @@
 			USR_NO, COM_NM, BUS_NO, CEO_NM, CHG_NM ) VALUES (
 				#{USR_NO}, #{COM_NM}, #{BUS_NO},
 				#{CEO_NM}, #{CHG_NM}
-			);
+			)
 	</insert>
 	
 	<insert id="joinPrivateUser" parameterType="kr.heartof.springWeb_01.vo.user.PrivateUserVO">
 		INSERT INTO PR_USR
 			(USR_NO, NM, SOCIAL_NO) VALUES (
 				#{USR_NO}, #{NM}, #{SOCIAL_NO}
-			);
+			)
 	</insert>
 </mapper>

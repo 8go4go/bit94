@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.heartof.springWeb_01.command.member.MemberCommandImpl;
+import kr.heartof.springWeb_01.vo.user.CompanyUserVO;
+import kr.heartof.springWeb_01.vo.user.PrivateUserVO;
 import kr.heartof.springWeb_01.vo.user.UserVO;
 
 @Controller
@@ -29,10 +31,21 @@ public class MemberController {
 		return "member/signup";
 	}
 	
-	@RequestMapping(value="/member/signupConfirm", method = RequestMethod.POST)
+	@RequestMapping(value="/member/signupConfirm/company", method = RequestMethod.POST)
 	@ResponseBody
-	public UserVO processSignup(UserVO reqUser) {
+	public CompanyUserVO processSignupCompany(CompanyUserVO reqUser) {
 		// 회원가입 처리 및 처리 결과 페이지로 이동
+		logger.info("processSignupCompany : " + reqUser.getUSR_CD());
+		command.joinMember(reqUser);
+		return reqUser;
+	}
+	
+	@RequestMapping(value="/member/signupConfirm/private", method = RequestMethod.POST)
+	@ResponseBody
+	public PrivateUserVO processSignupPrivate(PrivateUserVO reqUser) {
+		// 회원가입 처리 및 처리 결과 페이지로 이동
+		logger.info("processSignupPrivate : " + reqUser.getUSR_CD());
+		command.joinMember(reqUser);
 		return reqUser;
 	}
 	
@@ -45,10 +58,14 @@ public class MemberController {
 	@ResponseBody
 	public UserVO processLogin(HttpSession session, UserVO reqUser) {
 		logger.info("processLogin");
-		logger.info("USERID : " + reqUser.getUSRID());
-		logger.info("PASSWD : " + reqUser.getPASSWD());
-		session.setAttribute("user", reqUser);
-		return reqUser;
+		reqUser = command.isLogin(reqUser);
+		
+		if(reqUser != null) {
+			session.setAttribute("user", reqUser); 
+			return reqUser;
+		} else { 
+			return null;
+		}
 	}
 	
 	@RequestMapping("/member/memberinfo") 

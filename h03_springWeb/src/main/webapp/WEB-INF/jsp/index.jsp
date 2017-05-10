@@ -13,13 +13,12 @@
 <meta name="description" content="비트 경매 사이트에 오신것을 환영합니다.">
 <meta name="author" content="bit94 fifth team">
 
+<script type="text/javascript" src="${contextPath}/resources/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/bootstrap/bootstrap.js"></script>
+
 <link rel="stylesheet" href="${contextPath}/resources/css/jquery/jquery-ui.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/bootstrap/bootstrap.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.11.1/validate.min.js"></script>
-
-<script src="${contextPath}/resources/js/jquery/jquery-3.2.1.js"></script>
-<script src="${contextPath}/resources/js/jquery/jquery-ui.js"></script>
-<script src="${contextPath}/resources/js/bootstrap/bootstrap.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#mainModal").modal("show");

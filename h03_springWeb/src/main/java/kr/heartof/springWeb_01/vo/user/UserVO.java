@@ -13,6 +13,16 @@ public class UserVO {
 	private Date REG_DATE  ;
 	private String USR_CD  ; // 
 	private String CRE_DEG_CD; // 
+	private String WITHDRAWAL;
+	
+	public String getWITHDRAWAL() {
+		return WITHDRAWAL;
+	}
+	
+	public void setWITHDRAWAL(String WITHDRAWAL) {
+		this.WITHDRAWAL = WITHDRAWAL;
+	}
+	
 	/**
 	 * @return the uSR_NO
 	 */
@@ -84,7 +94,7 @@ public class UserVO {
 	 * @param zIPNO the zIPNO to set
 	 */
 	public void setZIPNO(String zIPNO) {
-		ZIPNO = zIPNO;
+		ZIPNO = zIPNO.replaceAll("-", "");
 	}
 	/**
 	 * @return the aDDRESS
