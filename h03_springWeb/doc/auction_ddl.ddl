@@ -429,7 +429,8 @@ CREATE TABLE USR
 	ADDRESS               VARCHAR(200) NOT NULL,
 	REG_DATE              DATE NOT NULL,
 	USR_CD                CHAR(1) NOT NULL,
-	CRE_DEG_CD            CHAR(1) NOT NULL
+	CRE_DEG_CD            CHAR(1) NOT NULL,
+	WITHDRAWAL			  CHAR(1)
 )
 ;
 
