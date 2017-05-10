@@ -37,16 +37,6 @@ public class MemberController {
 		return "member/signup";
 	}
 
-	@RequestMapping(value = "member/fileUpload", method = RequestMethod.POST)
-	@ResponseBody
-	public String fileUpload(MultipartHttpServletRequest req, HttpSession session, HttpServletRequest request) {
-		MultipartFile file = req.getFile("FILE_NM");
-		logger.info("fileUpload getName : " + file.getName());
-		logger.info("fileUpload getContentType : " + file.getContentType());
-		logger.info("fileUpload getSize : " + file.getSize());
-
-		return file.getName();
-	}
 	//
 	// @RequestMapping(value="/member/signupConfirm/company", method =
 	// RequestMethod.POST)
@@ -70,7 +60,7 @@ public class MemberController {
 
 	@RequestMapping(value = "/member/signupConfirm/company", method = RequestMethod.POST)
 	@ResponseBody
-	public CompanyUserVO processSignupCompany(MultipartHttpServletRequest multi) {
+	public CompanyUserVO processSignupCompany(MultipartHttpServletRequest multi, CompanyUserVO vo) throws Exception {
 		// 회원가입 처리 및 처리 결과 페이지로 이동
 		logger.info("processSignupCompany : ");
 		// 저장 경로 설정
@@ -99,11 +89,14 @@ public class MemberController {
 				e.printStackTrace();
 			}
 		}
-		return null;
+		
+		command.joinMember(vo);
+		
+		return vo;
 	}
 
 	@RequestMapping(value = "/member/signupConfirm/private", method = RequestMethod.POST)
-	public String processSignupPrivate(HttpServletRequest req) {
+	public PrivateUserVO processSignupPrivate(HttpServletRequest req, PrivateUserVO reqUser) throws Exception {
 		// 회원가입 처리 및 처리 결과 페이지로 이동
 		MultipartHttpServletRequest multi = (MultipartHttpServletRequest)req;
 		logger.info("processSignupPrivate : ");
@@ -124,7 +117,7 @@ public class MemberController {
 
 			MultipartFile mFile = multi.getFile(uploadFile);
 			String fileName = mFile.getOriginalFilename();
-			logger.info("실제 파일 이름 : " + fileName);
+			logger.info("실제 파일 이름 : " + fileName);	
 			newFileName = System.currentTimeMillis() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
 			logger.info("newFileName : " + newFileName);
 			try {
@@ -133,7 +126,10 @@ public class MemberController {
 				e.printStackTrace();
 			}
 		}
-		return newFileName;
+		
+		command.joinMember(reqUser);
+		
+		return reqUser;
 	}
 
 	@RequestMapping("/member/login")
