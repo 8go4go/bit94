@@ -154,7 +154,6 @@
 					<div class="col-xs-offset-3 col-xs-10">
 						<input type="submit" name="Submit" value="가입하기"
 							class="btn btn-primary" id="signupbtn"> 
-						<input type="button" class="btn btn-default" value="취소" data-dismiss="memberModal">
 					</div>
 				</div>
 			</form>

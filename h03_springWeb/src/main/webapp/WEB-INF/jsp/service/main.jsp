@@ -25,7 +25,7 @@
 					<li><a href="#" id="a_memberInfo" data-toggle="modal"
 						data-target="#memberModal" style="display:none">회원정보</a></li>
 					<li><a href="#" id="a_memberjoin" data-toggle="modal"
-						data-target="#memberModal">회원가입</a></li>
+						data-target="#memberJoinModal">회원가입</a></li>
 					<li><a href="#">고객센터</a></li>
 				</ul>
 
@@ -47,17 +47,17 @@
 		<!-- /.container -->
 	</nav>
 
-	<div id="memberModal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="container">
+	<div id="memberJoinModal" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
 				<jsp:include page="../member/signup.jsp"></jsp:include>
 			</div>
 		</div>
 	</div>
 
-	<div id="memberJoin" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="container">
+	<div id="membeInfoModal" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
 				<jsp:include page="../member/memberinfo.jsp"></jsp:include>
 			</div>
 		</div>

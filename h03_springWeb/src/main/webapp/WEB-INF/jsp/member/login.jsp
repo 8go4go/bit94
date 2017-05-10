@@ -22,7 +22,6 @@
 						placeholder="패스워드를 입력하세요">
 				</div>
 				<button type="submit" class="btn btn-sm btn-default" id="loginbtn">로그인</button>
-				<button type="button" class="btn btn-default" data-dismiss="loginModal">취소</button>
 			</form>
 		</div>
 	</div>
