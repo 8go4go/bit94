@@ -176,7 +176,7 @@
 			} 
 		}
 	});
-	
+
 	$('#signupbtn').click(function(event){
 		var joinUrl;
 		var radioValue = $("input[name=USR_CD]:checked").val();
@@ -186,12 +186,14 @@
 			joinUrl = '/member/signupConfirm/private';
 		}
 		
+		var formData = new FormData($("#signupForm")[0]);
+		
 		$.ajax({
 			   type : 'POST',
 			   url : joinUrl,
-			   dataType: 'text',
-			   cache : false,
-			   data : $('#signupForm').serialize(),
+			   data : formData,
+			   processData : false,
+	           contentType : false,
 			   success : function(result) {
 				   var jsonData = $.parseJSON(result);
 				   console.log(jsonData);
