@@ -1,11 +1,8 @@
-package kr.heartof.springWeb_01.command.member;
-
-import org.springframework.transaction.annotation.Transactional;
+package kr.heartof.springWeb_01.member.dao;
 
 import kr.heartof.springWeb_01.vo.user.UserVO;
 
-@Transactional
-public interface MemberCommand  {
+public interface MemberDAO {
 	public UserVO isLogin(UserVO vo);
 
 	public UserVO isLogin(String id, String passwd);
