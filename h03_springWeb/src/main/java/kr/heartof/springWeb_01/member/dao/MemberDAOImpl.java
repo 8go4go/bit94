@@ -18,10 +18,6 @@ public class MemberDAOImpl implements MemberDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
  
-	// public void setSqlSession(SqlSessionTemplate sqlSession) {
-	// this.sqlSession = sqlSession;
-	// }
-
 	public UserVO isLogin(UserVO vo) {
 		logger.info("isLogin");
 		UserVO user = sqlSession.selectOne("kr.heartof.springWeb_01.sql.mybatis.LoginMapper.isLogin", vo);
@@ -35,7 +31,7 @@ public class MemberDAOImpl implements MemberDAO{
 		return isLogin(vo);
 	}
 	
-	public boolean joinMember(UserVO user) throws Exception {  
+	public boolean joinMember(UserVO user) {  
 		int result = 0;
 		user.setUSRID(user.getEMAIL().substring(0, user.getEMAIL().indexOf("@")));
 		result = sqlSession.insert("kr.heartof.springWeb_01.sql.mybatis.LoginMapper.joinUser", user);

@@ -1,10 +1,7 @@
 package kr.heartof.springWeb_01.command.member;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import kr.heartof.springWeb_01.vo.user.UserVO;
 
-@Transactional
 public interface MemberCommand  {
 	public UserVO isLogin(UserVO vo);
 
