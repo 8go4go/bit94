@@ -17,10 +17,13 @@
 [bootstrap]
 	https://www.w3schools.com/bootstrap/default.asp
 	http://www.layoutit.com/
+	http://www.cssportal.com/
 	
 [javascript]
 	https://www.w3schools.com/js/default.asp
-
+	
+	Validation Form
+	http://www.w3resource.com/javascript/form/non-empty-field.php
 [jQuery]
 	https://www.w3schools.com/jquery/
 
