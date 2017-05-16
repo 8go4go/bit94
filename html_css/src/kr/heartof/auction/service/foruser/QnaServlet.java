@@ -23,10 +23,11 @@ public class QnaServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.addHeader("Content-Type", "text/html;charset=UTF-8");
-		
+		int currentPage = 1;
+		int total = 0;
 		List<BoardVO> list = new ArrayList<BoardVO>();
 		
-		for(int i=0; i < 55 ; i++) {
+		for(int i=0; i < 116 ; i++) {
 			BoardVO vo = new BoardVO();
 			vo.setBOARD_NO(i+1);
 			vo.setCONT("forEach는 다음과 같은 속성을 가진다.<br>"+
@@ -46,23 +47,41 @@ public class QnaServlet extends HttpServlet {
 			vo.setREG_DATE(new Date());
 			list.add(vo);
 		}
-		List<BoardVO> sendList = new ArrayList<BoardVO>();
 		
+		total = list.size();
+		if(request.getParameter("page") != null) {
+			currentPage = Integer.parseInt(request.getParameter("page"));
+		}
 		
-		int pageNumber = Integer.parseInt(request.getParameter("page"));
-		int total = 56;
-		
-		System.arraycopy(list, srcPos, sendList, destPos, length);
-		
+		int totalPage = total / 10 + (total % 10 > 0 ? 1 : 0);
+		List<BoardVO> sendList = null;
+		if(currentPage != totalPage) {
+			sendList = arraycopy(list, (currentPage - 1) * 10, 10);
+		} else { 
+			sendList = arraycopy(list, (currentPage - 1) * 10, total % 10);
+		}
+			
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/foruser/qna.jsp");
-		request.setAttribute("list", list);
+		request.setAttribute("list", sendList);
 		request.setAttribute("total", 56);
-		request.setAttribute("total", 1);
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("totalPage", totalPage);
 		dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
+	
+	private List<BoardVO> arraycopy(List<BoardVO> source, int startIndex, int count) {
+		List<BoardVO> sendList = new ArrayList<BoardVO>();
+		for(int i = startIndex; i < source.size() ; i++) {
+			if(count-- > 0) {
+				sendList.add(source.get(i));
+			} else {
+				break;
+			}
+		}
+		return sendList;
+	}
 }

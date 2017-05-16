@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="myPath" value="${pageContext.request.contextPath}" />
 <c:set var="boardList" value="${requestScope.list}" />
 
@@ -59,7 +60,16 @@ tr:NTH-CHILD(even) {
 
 </style>
 <script type="text/javascript">
-	
+function view(index) {
+	var ind = index % 10;
+	var els = document.getElementsByClassName("answer");
+	for(var i=0; i < els.length ; i++) {
+		if(i == ind - 1)
+			els[i].style = 'display:;';
+		else
+			els[i].style = 'display:none';
+	}	
+}	
 </script>
 
 <div id="contentwrap">
@@ -91,15 +101,32 @@ tr:NTH-CHILD(even) {
 					<c:choose>
 					<c:when test="${not empty boardList}" >
 					<c:forEach var="board" items="${boardList}" >
-						<tr>
+						<tr onmouseover="view(${board.BOARD_NO});">
 							<td><c:out value="${board.BOARD_NO}"/></td>
 							<td><c:out value="${board.FILE_NM}"/></td>
 							<td><c:out value="${board.TITLE}"/></td>
 							<td><c:out value="${board.USERID}"/></td>
 							<td><c:out value="${board.REVIEW_CNT}"/></td>
-							<td><c:out value="${board.REG_DATE}"/></td>
+							<td><fmt:formatDate value="${board.REG_DATE}" pattern="yyyy-MM-dd"/></td>
+						</tr>
+						<tr style="display:none" class="answer">
+							<td colspan="6" style="width:100%">${board.CONT}</td>
 						</tr>
 					</c:forEach>
+					<tr>
+						<td colspan="6" align="center">
+							<c:forEach var="i" begin="1" end="${totalPage}" step="1">
+							<c:choose>
+								<c:when test="${currentPage eq i}" >
+								<span style="color: red">${i}</span>
+								</c:when>
+								<c:otherwise>
+								<span style="color: yellow"><a href="${myPath}/service/foruser/qna.do?page=${i}">${i}</a></span>
+								</c:otherwise>
+							</c:choose>
+							</c:forEach>
+						</td>
+					</tr>
 					</c:when>
 					<c:otherwise>
 						<tr>
