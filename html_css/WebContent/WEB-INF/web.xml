@@ -8,6 +8,7 @@
 	<welcome-file-list>
 		<welcome-file>/jsp/index.jsp</welcome-file>
 	</welcome-file-list>
+	
 	<servlet>
 		<servlet-name>login</servlet-name>
 		<servlet-class>kr.heartof.auction.service.member.LoginServlet</servlet-class>
@@ -33,17 +34,4 @@
 		<servlet-name>qna</servlet-name>
 		<url-pattern>/service/foruser/qna.do</url-pattern>
 	</servlet-mapping> 
-	
-	<filter>
-	    <filter-name>setCharacterEncodingFilter</filter-name>
-	    <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
-	    <init-param>
-	        <param-name>encoding</param-name>
-		<param-value>UTF-8</param-value>
-	    </init-param>
-	</filter>
-	<filter-mapping>
-	    <filter-name>setCharacterEncodingFilter</filter-name>
-	    <url-pattern>/*</url-pattern>
-	</filter-mapping>
 </web-app>

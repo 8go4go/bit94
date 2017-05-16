@@ -1,8 +1,10 @@
 package kr.heartof.auction.vo.foruser;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class BoardVO {
+public class BoardVO implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private int BOARD_NO;
 	private int HIGH_BOARD_NO;
 	private String CONT;
