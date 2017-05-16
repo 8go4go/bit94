@@ -12,8 +12,8 @@
 					<li><a href="${lnbPath}/jsp/product/bidding.jsp">경매입찰</a></li>
 					<li><hr></li>
 				</c:if>
-				<li><a href="${lnbPath}/jsp/foruser/faq.jsp">F.A.Q</a></li>
-				<li><a href="${lnbPath}/jsp/foruser/qna.jsp">Q.N.A</a></li>
+				<li><a href="${lnbPath}/jsp/foruser/faq.jsp" >F.A.Q</a></li>
+				<li><a href="${lnbPath}/service/foruser/qna.do">Q.N.A</a></li>
 				<li><a href="${lnbPath}/jsp/foruser/contactUs.jsp">Contact Us</a></li>
 			</ul>
 		</div>

@@ -1,66 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="myPath" value="${pageContext.request.contextPath}" />
+<c:set var="boardList" value="${requestScope.list}" />
 
-
+<c:out value="${request.contentType}" />
 
 <c:import url="/jsp/common/header.jsp" />
 <c:import url="/jsp/common/gnb.jsp" />
 <c:import url="/jsp/common/lnb.jsp" />
-
-<script type="text/javascript">
-	function login() {
-		var form = document.getElementById('login_form');
-		var email = form.EMAIL;
-		var passwd = form.PASSWD;
-		var usr_cd = form.USR_CD;
-
-		if(!required(form)) {
-			alert("이메일 주소 또는 패스워드를 입력해주시기 바랍니다.");
-			return;
-		}
-		
-		if (!validationID(email.value)) {
-			EMAIL.focus();
-			alert("이메일 주소를 다시 입력해주시기 바랍니다.");
-			return;
-		}
-
-		form.method = 'post';
-		form.action = '${myPath}/service/member/login.do';
-		form.submit();
-
-		console.log(form);
-	}
-
-	function required(form) {
-		var arrs = form.getElementsByTagName('input');
-
-		for (var i = 0; i < arrs.length; i++) {
-			if (arrs[i].value.length == 0) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-	
-	function validationID(email) {
-		if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-			return true;
-		}
-		return false;
-	}
-
-	function cancel() {
-		var elements = document.getElementsByClassName('bitTxt');
-		
-		for(var i=0;  i < elements.length; i++) {
-			 elements[i].value = '';
-		}
-	}
-</script>
 
 <style type="text/css">
 #left, #center, #right {
@@ -71,70 +20,94 @@
 }
 
 #left {
-	width: 132px;
+	width: 0px;
 }
 
 #center {
-	width: 432px;
+	width: 696px;
 }
 
 #right {
-	width: 132px;
+	width: 0px;
 }
 
-table {
-	width: 400px
-}
+td {
+	font-size: 12px;
+	padding: 5px;
+	margin:5px 5px;	
+} 
 
-th, td:nth-child(odd) {
-	width: 35%;
-	font: bold;
-	text-align: right;
-	margin: 10px;
-	padding: 10px;
-	text-shadow: 1px 1px 0px #BEE2F9;
-}
+tr:NTH-CHILD(odd) {
+	font-size: 12px;
+	padding: 0px;
+	margin:0px;
+	border-radius: 5px;
+	border-left: 10px solid #1c64d1;
+	border-right: 10px solid #5ba3e0;
+/* 	background-color: #2586d7; */
+} 
 
-#ZIPNO1, #ZIPNO2 {
-	text-align: center;
-}
+tr:NTH-CHILD(even) {
+	font-size: 12px;
+	padding: 0px;
+	margin:0px;
+	border-radius: 5px;
+	border-left: 10px solid #ffffff;
+	border-right: 10px solid #ffffff;
+/* 	background-color: #2586d7; */
+} 
 
 </style>
+<script type="text/javascript">
+	
+</script>
+
 <div id="contentwrap">
 	<div id="content">
 		<div id="left" class="over_container"></div>
+
 		<div id="center" class="over_container">
-			<form id="login_form" name="login_form">
-				<h1 style="font-size: 16px; text-align: center;">로그인</h1>
-				<hr>
-				<table>
-					<tr>
-						<th>회원구분</th>
-						<td>개인<input class="bitRadio" type="radio" name="USR_CD"
-							id="USR_CD" value="1" checked="checked" style="width: 20px;"
-							onclick="usercd();" /> 회사<input class="bitRadio" type="radio"
-							name="USR_CD" id="USR_CD" value="2" style="width: 20px;"
-							onclick="usercd();" /></td>
-					</tr>
-					<tr>
-						<th>이메일</th>
-						<td><input class="bitTxt" type="email" name="EMAIL"
-							id="EMAIL" placeholder="이메일을 입력하세요" required maxlength="50" /></td>
-					</tr>
-					<tr>
-						<th>비밀번호</th>
-						<td><input class="bitTxt" type="password" name="PASSWD"
-							id="PASSWD" placeholder="비밀번호를 입력하세요" required maxlength="10" /></td>
-					</tr>
-				</table>
-			</form>
-			<table>
-				<tr>
-					<td colspan="2" style="text-align: center;"><input
-						class="bitBtn" type="button" id="JOINBTN" value="로그인"
-						onclick="login();" /> <input class="bitBtn" type="button"
-						id="CANCELBTN" value="취소" onclick="cancel();" /></td>
-				</tr>
+			<h1 style="font-size: 16px; text-align: center;">Q.N.A</h1>
+			<hr>
+			<table id="table_board" class="list">
+				<colgroup>
+					<!-- 번호 , 사진, 제목, 작성자, 조회수, 작성일 -->
+					<col width="30px">
+					<col width="52px">
+					<col width="462px">
+					<col width="55px">
+					<col width="55px">
+					<col width="60px">
+				</colgroup>
+				<thead><tr>
+					<th>NO</th>
+					<th>사진</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>조회수</th>
+					<th>작성일</th>
+				</tr></thead>
+				<tbody>
+					<c:choose>
+					<c:when test="${not empty boardList}" >
+					<c:forEach var="board" items="${boardList}" >
+						<tr>
+							<td><c:out value="${board.BOARD_NO}"/></td>
+							<td><c:out value="${board.FILE_NM}"/></td>
+							<td><c:out value="${board.TITLE}"/></td>
+							<td><c:out value="${board.USERID}"/></td>
+							<td><c:out value="${board.REVIEW_CNT}"/></td>
+							<td><c:out value="${board.REG_DATE}"/></td>
+						</tr>
+					</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<td colspan="6" align="center">작성된 글목록이 없습니다.</td>
+						</tr>
+					</c:otherwise>
+					</c:choose>
+				</tbody>
 			</table>
 		</div>
 		<div id="right" class="over_container"></div>

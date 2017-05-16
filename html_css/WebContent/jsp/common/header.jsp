@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<link rel="stylesheet" type="text/css" href="${myContextPath}/resource/css/c" />
+<link rel="stylesheet" type="text/css" href="${myContextPath}/resource/css/main.css" />
 <title>bit used auction</title>
 <style type="text/css">
 #left, #center, #right{

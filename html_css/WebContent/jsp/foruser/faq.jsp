@@ -29,25 +29,31 @@
 	width: 32px;
 }
 
-td:NTH-CHILD(odd){
+td {
 	font-size: 14px;
-	color: #E7E5E5;
 	padding: 15px;
 	margin:15px;
 	border-radius: 12px;
-	-webkit-border-radius: 12px;
-	-moz-border-radius: 12px;
-	box-shadow: 2px 2px 3px #666666;
-	-webkit-box-shadow: 2px 2px 3px #666666;
-	-moz-box-shadow: 2px 2px 3px #666666;
-	background: #8B8B8B;
-	background: linear-gradient(top, #A9A9A9, #7A7A7A);
-	background: -ms-linear-gradient(top, #A9A9A9, #7A7A7A);
-	background: -webkit-gradient(linear, left top, left bottom, from(#A9A9A9),
-		to(#7A7A7A));
-	background: -moz-linear-gradient(top, #A9A9A9, #7A7A7A);
-	text-shadow: 2px 2px 3px #000000;
-	z-index: 999;
+} 
+
+tr:NTH-CHILD(odd) {
+	font-size: 14px;
+	padding: 15px;
+	margin:15px;
+	border-radius: 12px;
+	border-left: 10px solid #1c64d1;
+	border-right: 10px solid #5ba3e0;
+/* 	background-color: #2586d7; */
+} 
+
+tr:NTH-CHILD(even) {
+	font-size: 14px;
+	padding: 15px;
+	margin:15px;
+	border-radius: 12px;
+	border-left: 10px solid #ffffff;
+	border-right: 10px solid #ffffff;
+/* 	background-color: #2586d7; */
 } 
 
 </style>
@@ -77,8 +83,6 @@ td:NTH-CHILD(odd){
 					<tr onmouseover="view(1);">
 						<td>Q. 회원가입을 했는데 야후옥션(이베이)에서 입찰이 안되요.</td>
 					</tr>
-				</tbody>
-				<tbody>
 					<tr class="answer" style='display:none'>
 						<td>
 							A. 패스카트에서 야후옥션/이베이 경매 대행 서비스를 이용하기 위해서는 '보증금'이 필요합니다.<br>
@@ -86,13 +90,9 @@ td:NTH-CHILD(odd){
    							자세한 사항은 도움말 > 비용 및 결제 안내 > 보증금 에서 확인 가능합니다.<br>
 						</td>
 					</tr>
-				</tbody>
-				<tbody>
 					<tr onmouseover="view(2);">
 						<td>Q. 회원 등급별 혜택과 등업 방법이 궁금해요. </td>
 					</tr>
-				</tbody>
-				<tbody>
 					<tr class="answer" style='display:none'>
 						<td>
 							A. 패스카트에서는 회원 등급에 따라 대행수수료, 환율 혜택 등 여러가지 혜택을 제공하고 있습니다.<br>
@@ -102,13 +102,9 @@ td:NTH-CHILD(odd){
 							자세한 사항은 도움말 > 회원안내 > 회원 등급 에서 확인 가능합니다.<br> 
 						</td>
 					</tr>
-				</tbody>
-				<tbody>
 					<tr onmouseover="view(3);">
 						<td>Q. 회원탈퇴 하고 싶어요.</td>
 					</tr>
-				</tbody>
-				<tbody>
 					<tr class="answer" style='display:none'>
 						<td>
 							A. 마이페이지 > 회원 전용 메뉴 > 회원 탈퇴 를 통해 탈퇴가 가능합니다. <br>
