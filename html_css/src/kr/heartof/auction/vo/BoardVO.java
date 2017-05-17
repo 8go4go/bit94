@@ -1,4 +1,4 @@
-package kr.heartof.auction.vo.foruser;
+package kr.heartof.auction.vo;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import kr.heartof.auction.vo.foruser.BoardVO;
+import kr.heartof.auction.vo.BoardVO;
 
 public class QnaDAOImpl implements QnaDAO {
 
 	@Override
-	public List<BoardVO> getBoardList() {
+	public List<BoardVO> getBoardList(int currentPage, int viewCount) {
 		List<BoardVO> list = new ArrayList<BoardVO>();
 		
 		for(int i=0; i < 116 ; i++) {
@@ -31,9 +31,31 @@ public class QnaDAOImpl implements QnaDAO {
 			vo.setUSERID("8go4go");
 			vo.setREG_DATE(new Date());
 			list.add(vo);
-		}	
-		return list;
+		}
+		
+		List<BoardVO> sendList = null;
+		int totalPage = getBoardTotal() / viewCount + (getBoardTotal() % viewCount > 0 ? 1 : 0);
+		if(currentPage != totalPage) {
+			sendList = arraycopy(list, (currentPage - 1) * viewCount, viewCount);
+		} else { 
+			sendList = arraycopy(list, (currentPage - 1) * viewCount, getBoardTotal() % viewCount);
+		}
+		
+		return sendList;
 	}
+	
+	private List<BoardVO> arraycopy(List<BoardVO> source, int startIndex, int count) {
+		List<BoardVO> sendList = new ArrayList<BoardVO>();
+		for(int i = startIndex; i < source.size() ; i++) {
+			if(count-- > 0) {
+				sendList.add(source.get(i));
+			} else {
+				break;
+			}
+		}
+		return sendList;
+	}
+	
 	
 	@Override
 	public boolean insertBoard(BoardVO vo) {

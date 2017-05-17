@@ -2,10 +2,11 @@ package kr.heartof.auction.service.foruser.dao;
 
 import java.util.List;
 
-import kr.heartof.auction.vo.foruser.BoardVO;
+import kr.heartof.auction.service.dao.BoardDAO;
+import kr.heartof.auction.vo.BoardVO;
 
-public interface QnaDAO {
-	public List<BoardVO> getBoardList() ;
+public interface QnaDAO extends BoardDAO{
+	public List<BoardVO> getBoardList(int currentPage, int viewCount);
 	
 	public boolean insertBoard(BoardVO vo);
 	

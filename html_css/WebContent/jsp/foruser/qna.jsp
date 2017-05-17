@@ -115,13 +115,13 @@ function view(index) {
 					</c:forEach>
 					<tr>
 						<td colspan="6" align="center">
-							<c:forEach var="i" begin="1" end="${totalPage}" step="1">
+							<c:forEach var="i" begin="${start}" end="${end}" step="1">
 							<c:choose>
 								<c:when test="${currentPage eq i}" >
-								<span style="color: red">${i}</span>
+									<span style="color: red">${i}</span>
 								</c:when>
 								<c:otherwise>
-								<span style="color: yellow"><a href="${myPath}/service/foruser/qna.do?page=${i}">${i}</a></span>
+									<span style="color: yellow"><a href="${myPath}/service/foruser/qna.do?page=${i}">${i}</a></span>
 								</c:otherwise>
 							</c:choose>
 							</c:forEach>
