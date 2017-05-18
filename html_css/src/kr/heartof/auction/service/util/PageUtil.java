@@ -106,7 +106,6 @@ public class PageUtil {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
 		
-		System.out.println(request.getParameter("viewCount"));
 		if (request.getParameter("viewCount") != null) {
 			viewCount = Integer.parseInt(request.getParameter("viewCount"));
 		} else {

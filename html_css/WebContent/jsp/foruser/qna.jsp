@@ -3,6 +3,9 @@
 	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<c:set var="user" value="${sessionScope.user}"/>
+
 <c:set var="myPath" value="${pageContext.request.contextPath}" />
 <c:set var="boardList" value="${requestScope.list}" />
 <c:set var="viewCount" value="${viewCount}" />
@@ -57,6 +60,16 @@ tr:NTH-CHILD(even) {
 	border-right: 10px solid #ffffff;
 /* 	background-color: #2586d7; */
 } 
+
+img {
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    padding: 2px;
+}
+
+img:hover {
+    box-shadow: 0 0 1px 1px rgba(0, 140, 186, 0.5);
+}
 
 </style>
 <script type="text/javascript">
@@ -131,20 +144,35 @@ function initViewCount() {
 					<c:choose>
 					<c:when test="${not empty boardList}" >
 					<c:forEach var="board" items="${boardList}" >
-						<tr onmouseover="view(${board.BOARD_NO});">
-							<td><c:out value="${board.BOARD_NO}"/></td>
-							<td><c:out value="${board.FILE_NM}"/></td>
-							<td><c:out value="${board.TITLE}"/></td>
+						<tr onmouseover="view(${board.BOARD_SEQ});">
+							<td><c:out value="${board.BOARD_SEQ}"/></td>
+							<td><img style="width:20px;vertical-align: middle;" src="${myPath}/${board.FILE_PATH}/${board.FILE_NM}" /></td>
+							<td>
+							<c:forEach var="i" begin="1" end="${board.INDENT}" step="1" >
+								<img style="vertical-align: middle;" src="${myPath}/resource/img/common/indent.jpg">
+							</c:forEach>
+							<c:out value="${board.TITLE}"/>
+							</td>
 							<td><c:out value="${board.USERID}"/></td>
 							<td><c:out value="${board.REVIEW_CNT}"/></td>
 							<td><fmt:formatDate value="${board.REG_DATE}" pattern="yyyy-MM-dd"/></td>
 						</tr>
 						<tr style="display:none" class="answer">
-							<td colspan="6" style="width:100%">${board.CONT}</td>
+							<td colspan="6" style="font-size:14px; letter-spacing: 3px;">	
+								<div align="right">
+									<a href="${myPath}/jsp/foruser/write.qna_write.jsp">
+									<img  alt="삭제하기" src="${myPath}/resource/img/common/delete.jpg"/></a>
+									<a href="${myPath}/jsp/foruser/write.qna_write.jsp"> 
+									<img alt="댓글달기" src="${myPath}/resource/img/common/reply.jpg"/></a>
+									<a href="${myPath}/jsp/foruser/write.qna_write.jsp"> 
+									<img alt="수정하기" src="${myPath}/resource/img/common/modify.jpg"/></a>
+								</div> 
+								<span style="margin:20px;">${board.CONT}</span>
+							</td>
 						</tr>
 					</c:forEach>
 					<tr>
-						<td colspan="6" align="center">
+						<td colspan="5" align="center">
 							<c:if test="${startIndicator eq 1 }">
 								<span style="color: yellow"><a href="${myPath}/service/foruser/qna.do?page=${start-1}&viewCount=${viewCount}">◁ </a></span>
 							</c:if>
@@ -161,6 +189,11 @@ function initViewCount() {
 							<c:if test="${endIndicator eq 1 }">
 								<span style="color: yellow"><a href="${myPath}/service/foruser/qna.do?page=${end+1}&viewCount=${viewCount}">▶</a></span>
 							</c:if>
+						</td>
+						<td align="right">
+							<span><a href="${myPath}/jsp/foruser/write.qna_write.jsp">
+							<img src="${myPath}/resource/img/common/add.jpg"/>
+							</a></span>
 						</td>
 					</tr>
 					</c:when>

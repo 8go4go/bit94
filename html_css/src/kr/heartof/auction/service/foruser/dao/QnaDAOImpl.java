@@ -3,6 +3,7 @@ package kr.heartof.auction.service.foruser.dao;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import kr.heartof.auction.vo.BoardVO;
 
@@ -14,7 +15,9 @@ public class QnaDAOImpl implements QnaDAO {
 		
 		for(int i=0; i < 116 ; i++) {
 			BoardVO vo = new BoardVO();
-			vo.setBOARD_NO(i+1);
+			vo.setBOARD_SEQ(i);
+			vo.setBOARD_NO(i);
+			vo.setINDENT(new Random().nextInt(2));
 			vo.setCONT("forEach는 다음과 같은 속성을 가진다.<br>"+
 					   "items : forEach가 순회할 Collection 개체를 지정한다. <br>"+
 					   "begin : 반복문의 시작값을 설정한다.<br>" + 
@@ -25,7 +28,7 @@ public class QnaDAOImpl implements QnaDAO {
 					   "<br>"+
 					   "기본적으로 forEach는 begin 과 end 속성만 설정해주면 동작하며 그 외 속성은 추가적인 옵션이다. 물론 이 두 부분만 설정됬을때는 세부적인 제어가 불가능 하고 step은 기본값으로 1이 작용한다");
 			vo.setFILE_NM("1.png");
-			vo.setFILE_PATH("html_css/resource/img/");
+			vo.setFILE_PATH("resource/img/");
 			vo.setREVIEW_CNT(100);
 			vo.setTITLE("[ JSTL ] 반복과 관련된 태그 (forEach, forToken )");
 			vo.setUSERID("8go4go");
