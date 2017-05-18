@@ -22,7 +22,7 @@ public class WriteBoardServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Data Coming");
 		
-		RequestDispatcher dispacher = request.getServletContext().getRequestDispatcher("/jsp/foruser/qna.jsp");
+		RequestDispatcher dispacher = request.getServletContext().getRequestDispatcher("/service/foruser/qna.do");
 		dispacher.forward(request, response);
 	}
 

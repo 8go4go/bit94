@@ -1,14 +1,50 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 
-<c:set var="user" value="${sessionScope.user}"/>
 <c:set var="myPath" value="${pageContext.request.contextPath}" />
 
 <c:import url="/jsp/common/header.jsp" />
 <c:import url="/jsp/common/gnb.jsp" />
 <c:import url="/jsp/common/lnb.jsp" />
 
+<script type="text/javascript">
+	function qna_write() {
+		var form = document.getElementById('writeForm');
+		var title = form.TITLE;
+		var cont = form.CONT;
+
+		if(!required(form)) {
+			alert("필수사항을 입력해주시기 바랍니다.");
+			return;
+		}
+
+		form.method = 'post';
+		form.action = '${myPath}/service/foruser/qna_write.do';
+		form.submit();
+
+		console.log(form);
+	}
+
+	function required(form) {
+		var arrs = form.getElementsByTagName('input');
+
+		for (var i = 0; i < arrs.length; i++) {
+			if (arrs[i].value.length == 0) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	function cancel() {
+		var elements = document.getElementsByClassName('bitTxt');
+		
+		for(var i=0;  i < elements.length; i++) {
+			 elements[i].value = '';
+		}
+	}
+</script>
 
 <style type="text/css">
 #left, #center, #right {
@@ -98,44 +134,6 @@ textarea {
 }
 
 </style>
-<script type="text/javascript">
-	function writeForm() {
-		var form = document.getElementById('writeForm');
-		var title = form.TITLE;
-		var cont = form.CONT;
-
-		if(!required(form)) {
-			alert("필수사항을 입력해주시기 바랍니다.");
-			return;
-		}
-
-		form.method = 'post';
-		form.action = '/service/foruser/qna_write.do';
-		form.submit();
-
-		console.log(form);
-	}
-
-	function required(form) {
-		var arrs = form.getElementsByTagName('input');
-
-		for (var i = 0; i < arrs.length; i++) {
-			if (arrs[i].value.length == 0) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	function cancel() {
-		var elements = document.getElementsByClassName('bitTxt');
-		
-		for(var i=0;  i < elements.length; i++) {
-			 elements[i].value = '';
-		}
-	}
-</script>
 <div id="contentwrap">
 	<div id="content">
 		<div id="left" class="over_container"></div>
@@ -149,7 +147,7 @@ textarea {
 	<div id="content">
 		<div id="left" class="over_container"></div>
 		<div id="center" class="over_container">
-			<form id="writeForm" name="writeForm" enctype="application/x-www-form-urlencoded">				
+			<form id="writeForm"  name="writeForm" enctype="multipart/form-data">				
 				<table>
 					<colgroup>
 					<!-- 번호 , 내용 696px-->
@@ -193,7 +191,7 @@ textarea {
 				</colgroup>
 				<tr>
 					<td colspan="4" style="text-align: center;">
-						<input class="bitBtn" type="button" id="WRITEBTN" value="등록" onclick="writeForm();" /> 
+						<input class="bitBtn" type="button" id="WRITEBTN" value="등록" onclick="qna_write();" /> 
 						<input class="bitBtn" type="button" id="CANCELBTN" value="취소" onclick="cancel();" />
 					</td>
 				</tr>
