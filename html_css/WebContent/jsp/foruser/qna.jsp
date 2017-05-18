@@ -5,8 +5,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="myPath" value="${pageContext.request.contextPath}" />
 <c:set var="boardList" value="${requestScope.list}" />
+<c:set var="viewCount" value="${viewCount}" />
 
-<c:out value="${request.contentType}" />
 
 <c:import url="/jsp/common/header.jsp" />
 <c:import url="/jsp/common/gnb.jsp" />
@@ -70,15 +70,45 @@ function view(index) {
 			els[i].style = 'display:none';
 	}	
 }	
-</script>
 
+function changeViewCount() {
+	var vc = document.getElementById('id_viewCount');
+	window.location = ("${myPath}/service/foruser/qna.do?viewCount=" + vc.value);
+}
+
+function initViewCount() {
+	var vc = document.getElementById('id_viewCount').options;
+	var fromServer = ${viewCount};
+	for(var i=0; i < vc.length; i++)
+    {
+		if(vc[i].value == fromServer) {
+			vc[i].selected = true;
+			return;
+		}
+    }
+}
+
+</script>
 <div id="contentwrap">
+	<div id="content">
+		<div id="left" class="over_container"></div>
+		<div id="center" class="over_container" align="center">
+			<h1 style="font-size: 16px;">Q.N.A</h1>
+			<hr style="display:inline-block;width:600px;">
+			<span>보기</span>
+			<select id="id_viewCount" onchange="changeViewCount();">
+					<option value="10">10개</option>
+					<option value="20">20개</option>
+					<option value="30">30개</option>
+			</select>
+		</div>
+		<div id="right" class="over_container">
+		</div>
+	</div>
 	<div id="content">
 		<div id="left" class="over_container"></div>
 
 		<div id="center" class="over_container">
-			<h1 style="font-size: 16px; text-align: center;">Q.N.A</h1>
-			<hr>
 			<table id="table_board" class="list">
 				<colgroup>
 					<!-- 번호 , 사진, 제목, 작성자, 조회수, 작성일 -->
@@ -115,16 +145,22 @@ function view(index) {
 					</c:forEach>
 					<tr>
 						<td colspan="6" align="center">
+							<c:if test="${startIndicator eq 1 }">
+								<span style="color: yellow"><a href="${myPath}/service/foruser/qna.do?page=${start-1}&viewCount=${viewCount}">◁ </a></span>
+							</c:if>
 							<c:forEach var="i" begin="${start}" end="${end}" step="1">
 							<c:choose>
 								<c:when test="${currentPage eq i}" >
 									<span style="color: red">${i}</span>
 								</c:when>
 								<c:otherwise>
-									<span style="color: yellow"><a href="${myPath}/service/foruser/qna.do?page=${i}">${i}</a></span>
+									<span style="color: yellow"><a href="${myPath}/service/foruser/qna.do?page=${i}&viewCount=${viewCount}">${i}</a></span>
 								</c:otherwise>
 							</c:choose>
 							</c:forEach>
+							<c:if test="${endIndicator eq 1 }">
+								<span style="color: yellow"><a href="${myPath}/service/foruser/qna.do?page=${end+1}&viewCount=${viewCount}">▶</a></span>
+							</c:if>
 						</td>
 					</tr>
 					</c:when>
@@ -140,4 +176,7 @@ function view(index) {
 		<div id="right" class="over_container"></div>
 	</div>
 </div>
+<script type="text/javascript">
+	window.onload = initViewCount();
+</script>
 <c:import url="/jsp/common/footer.jsp" />

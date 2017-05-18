@@ -15,20 +15,25 @@ import kr.heartof.auction.vo.BoardVO;
 
 public class QnaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private PageUtil util;
     public QnaServlet() {
         super();
-        util = new PageUtil(PageUtil.PAGE_30, PageUtil.BLOCKPAGE_5);
-        util.setDAO(new QnaDAOImpl());
     }
     
     
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.addHeader("Content-Type", "text/html;charset=UTF-8");
-		int currentPage = util.getCurrentPageFromClinet(request);
+		PageUtil util = new PageUtil(PageUtil.BLOCKPAGE_5);
+		util.setDAO(new QnaDAOImpl());
+		util.setHttpServletRequest(request);
+		int currentPage = util.getCurrentPageFromClinet();
 		int total = util.getTotalFromBoardData();
 		int totalPage = util.getTotalPage();
+		int startIndicator = util.startIndicator();
+		int endIndicator = util.endIndicator();
+		int viewCount = util.viewCount();
+		int start = util.getStart();
+		int end = util.getEnd();
 		List<BoardVO> sendList = util.getRequestBoardList(currentPage);;
 			
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/foruser/qna.jsp");
@@ -36,8 +41,11 @@ public class QnaServlet extends HttpServlet {
 		request.setAttribute("total", total);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("totalPage", totalPage);
-		request.setAttribute("start", util.getStart(request));
-		request.setAttribute("end", util.getEnd(request));
+		request.setAttribute("startIndicator", startIndicator);
+		request.setAttribute("endIndicator", endIndicator);
+		request.setAttribute("start", start);
+		request.setAttribute("end", end);
+		request.setAttribute("viewCount", viewCount);
 		dispatcher.forward(request, response);
 	}
 	

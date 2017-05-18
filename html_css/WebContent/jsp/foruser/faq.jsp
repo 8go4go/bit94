@@ -18,15 +18,15 @@
 }
 
 #left {
-	width: 32px;
+	width: 0px;
 }
 
 #center {
-	width: 632px;
+	width: 696px;
 }
 
 #right {
-	width: 32px;
+	width: 0px;
 }
 
 td {
@@ -71,13 +71,18 @@ tr:NTH-CHILD(even) {
 <div id="contentwrap">
 	<div id="content">
 		<div id="left" class="over_container"></div>
-
 		<div id="center" class="over_container">
 			<h1 style="font-size: 16px; text-align: center;">F.A.Q</h1>
 			<hr>
+		</div>
+		<div id="right" class="over_container"></div>
+	</div>
+	<div id="content">
+		<div id="left" class="over_container"></div>
+		<div id="center" class="over_container">
 			<table id="table_board" class="list">
 				<colgroup>
-					<col width="632px">
+					<col width="696px">
 				</colgroup>
 				<tbody>
 					<tr onmouseover="view(1);">
