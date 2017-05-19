@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import kr.heartof.auction.constant.CreDegCD;
 import kr.heartof.auction.constant.UserCD;
 import kr.heartof.auction.constant.WITHDRAWAL;
-import kr.heartof.auction.vo.member.CompanyUserVO;
-import kr.heartof.auction.vo.member.PrivateUser;
+import kr.heartof.auction.vo.member.ComUsrVO;
+import kr.heartof.auction.vo.member.PrUsrVO;
 import kr.heartof.auction.vo.member.UsrVO;
 
 public class JoinServlet extends HttpServlet {
@@ -43,16 +43,14 @@ public class JoinServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	private PrivateUser makePrivateUser(HttpServletRequest request) {
-		PrivateUser user = new PrivateUser();
+	private PrUsrVO makePrivateUser(HttpServletRequest request) {
+		PrUsrVO user = new PrUsrVO();
 		user.setADDRESS(request.getParameter("ADDRESS1") + " " + request.getParameter("ADDRESS2"));
-		user.setCRE_DEG_CD("");
+		user.setCRE_DEG_STAT("");
 		user.setEMAIL(request.getParameter("EMAIL"));
 		user.setTELNO(request.getParameter("TELNO"));
 		user.setUSR_CD(request.getParameter("TELNO"));
-		user.setUSRID(request.getParameter("EMAIL"));
-		user.setWITHDRAWAL("");
-		user.setZIPNO(request.getParameter("ZIPNO1") + "-" + request.getParameter("ZIPNO2"));
+		user.setZIP_NUM(request.getParameter("ZIPNO1") + request.getParameter("ZIPNO2"));
 		
 		user.setNM(request.getParameter("NM"));
 		user.setNM(request.getParameter("SOCIAL_NO"));
@@ -60,8 +58,8 @@ public class JoinServlet extends HttpServlet {
 		return user;
 	}
 	
-	private CompanyUserVO makeCompanyUserVO(HttpServletRequest request) {
-		CompanyUserVO user = new CompanyUserVO();
+	private ComUsrVO makeCompanyUserVO(HttpServletRequest request) {
+		ComUsrVO user = new ComUsrVO();
 		user.setADDRESS(request.getParameter("ADDRESS1") + " " + request.getParameter("ADDRESS2"));
 		user.setCRE_DEG_CD(CreDegCD.REGULAR);
 		user.setEMAIL(request.getParameter("EMAIL"));
